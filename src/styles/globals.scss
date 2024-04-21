@@ -1,0 +1,23 @@
+@import 'antd/antd';
+@import 'tailwind/tailwind';
+@import 'common/scrollbar';
+@import 'common/navbar';
+@import '../../public/antd.min.css';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 16px;
+  color: var(--color-text-primary);
+}
+
+a {
+  text-decoration: none;
+}
