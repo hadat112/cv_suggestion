@@ -1,10 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import Header from './components/Header';
 
 interface IProps {
   header?: ReactNode;
-  content: ReactNode;
-  isShowingChat?: boolean;
+  content: ReactElement;
 }
 
 export default function DefaultLayout({ header, content }: IProps) {
