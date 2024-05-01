@@ -1,8 +1,5 @@
 import { APIResponse } from '@/interfaces';
 import axios, { AxiosResponse, AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
-import JSONbig from 'json-bigint';
-
-const JSONbigString = JSONbig({ storeAsString: true });
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
@@ -61,7 +58,6 @@ class ApiClient {
     const api: AxiosInstance = axios.create({
       baseURL: this.baseURL,
       timeout: 30000,
-      transformResponse: [(data) => JSONbigString.parse(data)],
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',

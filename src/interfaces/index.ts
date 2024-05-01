@@ -5,14 +5,12 @@ export interface APIResponse<T = any> {
   status: number;
   error?: string;
   message?: string;
-  pagination?: IPagination;
 }
 
 export interface IPagination {
   page: number;
   limit: number;
-  total_pages: number;
-  count: number;
+  total: number;
 }
 
 export interface IOption extends DefaultOptionType {

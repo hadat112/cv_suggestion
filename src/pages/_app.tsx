@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <title>Store Platform</title>
+        <title>Talented</title>
       </Head>
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>

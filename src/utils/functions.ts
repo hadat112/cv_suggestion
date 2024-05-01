@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { RcFile } from 'antd/es/upload';
 import lodash from 'lodash';
 

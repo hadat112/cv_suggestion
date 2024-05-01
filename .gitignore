@@ -32,18 +32,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+.yarn 
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-#cypress
-/cypress/screenshots
-/cypress/videos
-/cypress/fixtures
-.nyc_output
-cypress-coverage
-
-# Sentry Auth Token
-.sentryclirc
 
 /public/antd.min.css

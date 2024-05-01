@@ -29,28 +29,10 @@ export const LIGHT: IColor = {
   'grey-100': '#E8E8E8',
   'grey-50': '#F3F3F3',
 
-  primary: '#00904a',
-  'primary-50': '#e5f4ed',
-  'primary-100': '#b3dec9',
-  'primary-150': '#4DB281',
-  'primary-200': '#33a66e',
-  'primary-500': '#006534',
+  primary: '#4DA8DA',
 
   'red-50': '#fef2f2',
   'red-500': '#EB5757',
-
-  'green-50': '#f0fdf4',
-  'green-500': '#22c55e',
-
-  'blue-50': '#eff6ff',
-  'blue-500': '#0767DB',
-
-  'orange-50': '#fff7ed',
-  'orange-500': '#F18E32',
-
-  'yellow-500': ' #F2C94C',
-
-  'purple-500': '#9A3EE0',
 };
 
 export const DARK: IColor = {
@@ -81,24 +63,8 @@ export const DARK: IColor = {
   'grey-100': '#7A7A7A',
   'grey-50': '#5C5C5C',
 
-  primary: '#00DB4D',
-  'primary-50': '#e5f4ed',
-  'primary-100': '#b3dec9',
-  'primary-150': '#4DB281',
-  'primary-200': '#33a66e',
-  'primary-500': '#006534',
+  primary: '#1A73E8',
 
   'red-50': '#fef2f2',
   'red-500': '#F8503D',
-
-  'green-50': '#22c55e',
-  'green-500': '#f0fdf4',
-
-  'blue-50': '#eff6ff',
-  'blue-500': '#2D84FF',
-
-  'orange-50': '#f97316',
-  'orange-500': '#F18E32',
-
-  'purple-500': '#9A3EE0',
 };

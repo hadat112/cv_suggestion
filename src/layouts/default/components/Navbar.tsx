@@ -6,19 +6,8 @@ import { ArrowDownIcon } from '@/components/icons';
 
 export const navitems = [
   {
-    label: (
-      <div className="flex items-center gap-2">
-        Tổng quan
-        <ArrowDownIcon />
-      </div>
-    ),
+    label: 'Tổng quan',
     key: '/overall',
-    children: [
-      {
-        label: 'Tổng quan',
-        key: '/overall1',
-      },
-    ],
   },
 ];
 

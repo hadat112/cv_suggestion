@@ -34,7 +34,6 @@ const injectedFn = String(setColorsByTheme)
   .replace('initialColorMode', INITIAL_COLOR_MODE);
 
 export default function Document() {
-  const date = process.env.APP_VERSION;
   return (
     <Html lang="en">
       <Head>
@@ -42,8 +41,6 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
           rel="stylesheet"
         />
-        <meta app-version={date} />
-        <link rel="icon" href="/ghtk.ico" />
       </Head>
       <body>
         <Script
@@ -53,7 +50,6 @@ export default function Document() {
             __html: `(${injectedFn})()`,
           }}
         />
-
         <Main />
         <NextScript />
       </body>

@@ -11,30 +11,31 @@ const Home = () => {
   const handleButtonClick = () => {
     setPrimaryOverlay(true);
     setTimeout(() => {
-      router.push('/pos');
+      router.push('/');
     }, 500);
   };
 
   const handleButtonClick1 = () => {
     setWhiteOverlay(true);
     setTimeout(() => {
-      router.push('/warehouse');
+      router.push('/');
     }, 500);
   };
 
   return (
     <div className="flex w-screen  h-screen items-center justify-center">
-      <div className="flex-1 flex items-center justify-center bg-white h-full relative">
+      <div className="flex-1 flex items-center justify-center bg-th-background h-full relative">
         {!whiteOverlay && (
           <Button
             onClick={handleButtonClick}
             type="primary"
             className={classNames('w-[200px] h-[200px] rounded-xl z-10 absolute transition duration-500', {
-              '!bg-white !text-th-primary hover:!bg-white right-0 translate-x-1/2': primaryOverlay,
+              '!bg-th-background !text-th-primary hover:!bg-th-background right-0 translate-x-1/2':
+                primaryOverlay,
               'hover:bg-th-primary hover:!text-white': !primaryOverlay,
             })}
           >
-            POS Screen
+            Screen
           </Button>
         )}
         <div
@@ -49,7 +50,7 @@ const Home = () => {
           <Button
             id="management-screen"
             className={classNames('w-[200px] h-[200px] rounded-xl z-10 absolute transition duration-500', {
-              '!bg-white !text-th-primary hover:!bg-white': !whiteOverlay,
+              '!bg-th-background !text-th-primary hover:!bg-th-background': !whiteOverlay,
               'hover:bg-th-primary hover:!text-white left-0 -translate-x-1/2': whiteOverlay,
             })}
             type={whiteOverlay ? 'primary' : 'default'}
@@ -60,7 +61,7 @@ const Home = () => {
         )}
         <div
           className={`absolute top-0 left-0 w-full h-full transition duration-500 ease-in-out pointer-events-none z-0 ${
-            whiteOverlay ? 'bg-white' : ''
+            whiteOverlay ? 'bg-th-background' : ''
           }`}
           id="overlay"
         ></div>
