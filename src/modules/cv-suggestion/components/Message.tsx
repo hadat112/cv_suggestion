@@ -2,6 +2,7 @@ import cn from 'classnames';
 import { Avatar } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
+import CvDownloadBtn from './CvDownloadBtn';
 
 const PERIOD_MESSAGE = 3;
 const PERIOD_AVATAR = 1;
@@ -29,8 +30,18 @@ const Message = ({ message, nextMessage }) => {
   const isCurrentUser = message?.sender?.user_type === 'user';
   const isMessageSameUser = message?.sender?.id === nextMessage?.sender?.id;
   const isShowTimeMessage = showTimeAndAvatar(message?.created_at, nextMessage?.created_at, PERIOD_MESSAGE);
-
   const isShowAvatar = showTimeAndAvatar(message?.created_at, nextMessage?.created_at, PERIOD_AVATAR);
+
+  const onDownload = () => {
+    const pdfUrl = 'fallback.png';
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = 'document.png'; // specify the filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div>
       {isShowTimeMessage && (
@@ -39,13 +50,13 @@ const Message = ({ message, nextMessage }) => {
         </div>
       )}
       <div
-        className={cn('flex gap-2', {
+        className={cn('flex gap-1 w-full items-stretch', {
           'justify-end': isCurrentUser,
           'mt-4': !isMessageSameUser,
         })}
       >
         <div
-          className={cn({
+          className={cn('flex items-end', {
             invisible: isMessageSameUser && !isShowAvatar,
           })}
         >
@@ -57,25 +68,32 @@ const Message = ({ message, nextMessage }) => {
           )}
         </div>
         <div
-          className={cn('flex flex-col text-base max-w-2xl mx-2', {
+          className={cn('flex flex-col justify-center text-base max-w-[80%] mx-2 flex-1 msg', {
             'order-1 items-end': isCurrentUser,
             'order-2 items-start': !isCurrentUser,
           })}
         >
-          {!isMessageSameUser && !isCurrentUser && (
-            <div className="text-sm text-th-grey-400 mb-1">{message?.sender?.username}</div>
-          )}
-          {message?.text && (
+          {/* {!isMessageSameUser && !isCurrentUser && (
+            <div className="text-sm text-th-grey-400 mb-1 username">{message?.sender?.username}</div>
+          )} */}
+          {message?.msg_type === 'text' && (
             <div
               className={cn(
                 'px-4 py-1 rounded-xl inline-block break-words border border-solid border-th-border',
                 {
                   'bg-th-primary text-white': isCurrentUser,
-                  'bg-th-background-1': !isCurrentUser,
+                  'bg-th-white': !isCurrentUser,
                 }
               )}
             >
               {message?.text}
+            </div>
+          )}
+          {message?.msg_type === 'cv' && (
+            <div className="flex flex-col gap-y-2">
+              {message.list_cv.map((cv) => (
+                <CvDownloadBtn key={cv.id} onClick={onDownload} />
+              ))}
             </div>
           )}
         </div>

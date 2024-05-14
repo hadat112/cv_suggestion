@@ -3,7 +3,7 @@ import Message from './Message';
 import { memo } from 'react';
 
 const MessagesList = () => {
-  const listMessages = messages.data.reverse();
+  const listMessages = messages.data;
 
   return (
     <div className="flex h-full flex-1 flex-col-reverse gap-1 p-4 overflow-y-auto w-full">
