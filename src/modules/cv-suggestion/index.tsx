@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Input, Spin } from 'antd';
 import { Send } from '@/components/icons';
 import CvDownloadBtn from './components/CvDownloadBtn';
-import { MessagesList } from './components/MessagesList';
+import MessagesList from './components/MessagesList';
+
 const CvSuggestion = () => {
   const [fetching, setFetching] = useState(false);
   const [search, setSearch] = useState('');
@@ -30,7 +31,13 @@ const CvSuggestion = () => {
         Search
       </div>
       <div className="flex flex-col items-center w-full flex-1 overflow-auto">
-        <MessagesList />
+        {!fetching ? (
+          <MessagesList />
+        ) : (
+          <div className="min-h-[500px] flex items-center justify-center">
+            <Spin spinning />
+          </div>
+        )}
       </div>
       <div className="border-0 border-t border-solid border-th-grey-200 p-3 w-full">
         <div className="w-full flex items-center justify-center relative">
@@ -52,39 +59,6 @@ const CvSuggestion = () => {
           </button>
         </div>
       </div>
-      {/* <div className="w-full flex items-center justify-center relative">
-        <Input.TextArea
-          className="w-full max-h-[240px] overflow-auto pr-8"
-          placeholder="Nhập mô tả công việc cần tuyển dụng!"
-          autoSize
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button
-          // eslint-disable-next-line max-len
-          className={`absolute bottom-[7px] right-2 bg-transparent border-none flex items-center justify-center text-2xl cursor-pointer focus-visible:outline-none ${
-            search?.length ? 'text-th-primary ' : ''
-          }`}
-          onClick={handleSend}
-        >
-          <Send />
-        </button>
-      </div>
-
-      {!fetching ? (
-        <div className="w-full mt-8 flex flex-col gap-4 ">
-          <h2 className="text-">Danh sách cv phù hợp</h2>
-          <CvDownloadBtn onClick={onDownload} />
-          <CvDownloadBtn onClick={onDownload} />
-          <CvDownloadBtn onClick={onDownload} />
-          <CvDownloadBtn onClick={onDownload} />
-          <CvDownloadBtn onClick={onDownload} />
-        </div>
-      ) : (
-        <div className="min-h-[500px] flex items-center justify-center">
-          <Spin spinning />
-        </div>
-      )} */}
     </div>
   );
 };

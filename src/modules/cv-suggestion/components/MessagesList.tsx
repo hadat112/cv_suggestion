@@ -1,7 +1,8 @@
 import { messages } from 'mockup';
 import Message from './Message';
+import { memo } from 'react';
 
-export const MessagesList = () => {
+const MessagesList = () => {
   const listMessages = messages.data.reverse();
 
   return (
@@ -12,3 +13,5 @@ export const MessagesList = () => {
     </div>
   );
 };
+
+export default memo(MessagesList);
