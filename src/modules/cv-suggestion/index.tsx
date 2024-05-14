@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Spin } from 'antd';
 import { Send } from '@/components/icons';
-import CvDownloadBtn from './components/CvDownloadBtn';
 import MessagesList from './components/MessagesList';
 
 const CvSuggestion = () => {
@@ -13,16 +12,6 @@ const CvSuggestion = () => {
     setTimeout(() => {
       setFetching(false);
     }, 1000);
-  };
-
-  const onDownload = () => {
-    const pdfUrl = 'fallback.png';
-    const link = document.createElement('a');
-    link.href = pdfUrl;
-    link.download = 'document.png'; // specify the filename
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   };
 
   return (
@@ -45,6 +34,7 @@ const CvSuggestion = () => {
             className="w-full max-h-[240px] overflow-auto pr-8"
             placeholder="Nhập mô tả công việc cần tuyển dụng!"
             autoSize
+            autoFocus
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

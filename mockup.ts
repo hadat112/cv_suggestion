@@ -65,7 +65,7 @@ export const messages = {
     },
     {
       id: '1201821850214416384',
-      msg_type: 'quote_message',
+      msg_type: 'cv',
       text: '',
       created_at: '2024-01-30T09:30:57.861Z',
       sender: {
@@ -74,7 +74,21 @@ export const messages = {
         user_id: '648310',
         username: 'TA CV',
       },
+      list_cv: [
+        {
+          id: 1,
+        },
+        {
+          id: 2,
+        },
+        {
+          id: 3,
+        },
+        {
+          id: 4,
+        },
+      ],
     },
-  ],
+  ].reverse(),
   timestamp: '2024-01-31T04:30:47.245Z',
 };
