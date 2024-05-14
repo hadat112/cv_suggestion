@@ -1,4 +1,3 @@
-import { RcFile } from 'antd/es/upload';
 import lodash from 'lodash';
 
 export const getOptionFromObj = (obj) => {
@@ -54,15 +53,6 @@ export const toVND = (val: number) => {
   return val ? val.toLocaleString() : '';
 };
 
-export const getBase64 = (file: RcFile): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
-};
-
 export const roundNumberTo = (number, digit) => {
   return +(Math.round(number * 100) / 100).toFixed(digit);
 };
@@ -89,3 +79,8 @@ export function normalizeText(str: string) {
     .replace(/đ/g, 'd')
     .replace(/Đ/g, 'D');
 }
+
+export const formatNumber = (num: number) => {
+  if (!num) return '0';
+  return num?.toLocaleString().replace(/,/g, ',');
+};

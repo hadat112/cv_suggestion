@@ -1,0 +1,40 @@
+@media only screen and (min-width: 525px) and (max-width: 900px) {
+  .responsive-range {
+    .ant-picker-panels {
+      flex-direction: column;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-range-picker.ant-picker-dropdown {
+    .ant-picker-panel-layout {
+      display: flex;
+      flex-direction: column;
+
+      .ant-picker-presets {
+        height: 100px;
+        min-width: 100%;
+
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+
+          li {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    .ant-picker-panel:last-child .ant-picker-date-panel {
+      display: none;
+    }
+
+    .ant-picker-panel:first-child .ant-picker-date-panel .ant-picker-header-next-btn,
+    .ant-picker-panel:first-child .ant-picker-date-panel .ant-picker-header-super-next-btn {
+      visibility: visible !important;
+    }
+  }
+}
