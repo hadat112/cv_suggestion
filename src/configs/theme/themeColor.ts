@@ -5,22 +5,23 @@ export const LIGHT: IColor = {
 
   text: '#000',
   white: '#fff',
+  black: '#000',
   'text-primary': '#1a1a1a',
   'text-secondary': '#5C5C5C',
   'text-hint': '#7A7A7A',
   'text-strock': '#B3B3B3',
   'text-error': '#eb5757',
 
-  background: '#fff',
+  background: '#F8FAFC',
   'background-overlay': '#F8FAFC',
   'background-search': '#F4F4F4',
-  'background-1': '#f1f1f1',
+  'background-1': '#F7F7F8',
   'background-2': '#ffffff',
   'background-3': '#f2f2f2',
   'background-4': '#f6f6f6',
   'background-5': '#ffffffcc',
 
-  'divider-1': '#E6E6E6',
+  border: '#E6E6E6',
 
   'grey-500': '#5C5C5C',
   'grey-400': '#7A7A7A',
@@ -37,7 +38,8 @@ export const LIGHT: IColor = {
 
 export const DARK: IColor = {
   display: 'dark',
-
+  black: '#5C5C5C',
+  white: '#1a1a1a',
   text: '#fff',
   'text-primary': '#ffffff',
   'text-secondary': '#A6A6A5',
@@ -54,7 +56,7 @@ export const DARK: IColor = {
   'background-4': '#2A2A2B',
   'background-5': '#1C1C1Dcc',
 
-  'divider-1': '#4C4B4C',
+  border: '#4C4B4C',
 
   'grey-500': '#F3F3F3',
   'grey-400': '#E8E8E8',
@@ -63,7 +65,7 @@ export const DARK: IColor = {
   'grey-100': '#7A7A7A',
   'grey-50': '#5C5C5C',
 
-  primary: '#1A73E8',
+  primary: '#4DA8DA',
 
   'red-50': '#fef2f2',
   'red-500': '#F8503D',

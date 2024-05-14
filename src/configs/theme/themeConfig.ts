@@ -1,9 +1,19 @@
 import * as colors from './themeColor';
 
-type PrefixColor = 'primary' | 'grey' | 'red' | 'orange' | 'green' | 'blue' | 'white' | 'yellow' | 'purple';
+type PrefixColor =
+  | 'primary'
+  | 'grey'
+  | 'red'
+  | 'orange'
+  | 'green'
+  | 'blue'
+  | 'white'
+  | 'yellow'
+  | 'purple'
+  | 'black';
 type ToneColor = '50' | '100' | '150' | '200' | '300' | '400' | '500';
 
-type PrefixComponent = 'background' | 'text' | 'divider';
+type PrefixComponent = 'background' | 'text' | 'border';
 type TypeComponent =
   | 'primary'
   | 'secondary'
