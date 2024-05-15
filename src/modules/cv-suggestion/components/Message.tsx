@@ -63,7 +63,7 @@ const Message = ({ message, nextMessage }) => {
           {!isCurrentUser && (
             <Avatar
               className="border border-solid border-th-border"
-              src={<img src="/fallback.png" alt="avatar" />}
+              src={<img src="/TA.png" alt="avatar" />}
             />
           )}
         </div>
@@ -82,7 +82,7 @@ const Message = ({ message, nextMessage }) => {
                 'px-4 py-1 rounded-xl inline-block break-words border border-solid border-th-border',
                 {
                   'bg-th-primary text-white': isCurrentUser,
-                  'bg-th-white': !isCurrentUser,
+                  'bg-th-background-1': !isCurrentUser,
                 }
               )}
             >

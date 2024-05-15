@@ -14,3 +14,6 @@ export { default as RightTriggerIcon } from './RightTriggerIcon.svg';
 export { default as DownloadIcon } from './Download.svg';
 export { default as MoonIcon } from './Moon.svg';
 export { default as SunIcon } from './Sun.svg';
+export { default as ChatIcon } from './Chat.svg';
+export { default as CHPlayIcon } from './CHPlay.svg';
+export { default as AppleIcon } from './Apple.svg';

@@ -44,7 +44,7 @@ export const DARK: IColor = {
   'text-primary': '#ffffff',
   'text-secondary': '#A6A6A5',
   'text-hint': '#9A9A9A',
-  'text-strock': '#4D4D4D',
+  'text-strock': '#6D6D6D',
   'text-error': '#F8503D',
 
   background: '#1C1C1D',

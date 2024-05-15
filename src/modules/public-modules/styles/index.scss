@@ -1,0 +1,40 @@
+.username-input::placeholder {
+  color: #808080 !important;
+}
+
+.password-input {
+  input {
+    &::placeholder {
+      color: #808080;
+    }
+  }
+
+  .ant-input-suffix .anticon {
+    color: #5c5c5c;
+  }
+
+  .ant-input-suffix .anticon:hover {
+    color: #5c5c5c;
+  }
+}
+
+.bg-opacity {
+  filter: brightness(60%);
+}
+
+.login {
+  .ant-form-item-label > label {
+    font-weight: 600;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  .ant-form-item-explain > .ant-form-item-explain-error {
+    font-size: 14px;
+  }
+
+  .ant-form-item-extra {
+    padding: 0 16px;
+    font-size: 14px;
+  }
+}

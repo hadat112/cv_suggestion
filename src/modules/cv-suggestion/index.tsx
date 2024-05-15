@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { Input, Spin } from 'antd';
+import { Avatar, Image, Input } from 'antd';
 import { Send } from '@/components/icons';
 import MessagesList from './components/MessagesList';
 
 const CvSuggestion = () => {
   const [fetching, setFetching] = useState(false);
   const [search, setSearch] = useState('');
-  const handleSend = () => {
-    setFetching(true);
 
+  const handleSend = () => {
+    if (!search?.length) return;
+
+    setFetching(true);
+    setSearch('');
     setTimeout(() => {
       setFetching(false);
-    }, 1000);
+    }, 3000);
   };
 
   return (
@@ -20,14 +23,14 @@ const CvSuggestion = () => {
         Search
       </div>
       <div className="flex flex-col items-center w-full flex-1 overflow-auto">
-        {!fetching ? (
-          <MessagesList />
-        ) : (
-          <div className="min-h-[500px] flex items-center justify-center">
-            <Spin spinning />
-          </div>
-        )}
+        <MessagesList />
       </div>
+      {fetching && (
+        <div className="flex items-center justify-start mb-2 ml-6 mr-auto relative filter-[alpha(opacity=100)]">
+          <Avatar className="border border-solid border-th-border" src="/TA.png" size={26} />
+          <Image preview={false} className="ml-2 mt-2" src="/dots.gif" alt="Dot" width={40} />
+        </div>
+      )}
       <div className="border-0 border-t border-solid border-th-grey-200 p-3 w-full">
         <div className="w-full flex items-center justify-center relative">
           <Input.TextArea
@@ -39,10 +42,8 @@ const CvSuggestion = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
           <button
-            // eslint-disable-next-line max-len
-            className={`absolute bottom-[7px] right-2 bg-transparent border-none flex items-center justify-center text-2xl cursor-pointer focus-visible:outline-none ${
-              search?.length ? 'text-th-primary ' : ''
-            }`}
+            className={`absolute bottom-[7px] right-2 bg-transparent border-none flex items-center justify-center
+             text-2xl cursor-pointer focus-visible:outline-none ${search?.length ? 'text-th-primary ' : ''}`}
             onClick={handleSend}
           >
             <Send />
