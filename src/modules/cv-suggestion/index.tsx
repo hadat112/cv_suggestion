@@ -19,8 +19,8 @@ const CvSuggestion = () => {
 
   return (
     <div className="flex flex-col items-center w-full flex-1 overflow-auto">
-      <div className="h-14 border-0 border-b border-solid border-th-grey-200 grid items-center grid-cols-2 grid-rows-1 w-full p-4">
-        Search
+      <div className="flex items-center h-15 border-0 border-b border-solid border-th-border w-full p-4">
+        <h2 className="text-xl m-0">CV SEARCH</h2>
       </div>
       <div className="flex flex-col items-center w-full flex-1 overflow-auto">
         <MessagesList />
@@ -31,7 +31,7 @@ const CvSuggestion = () => {
           <Image preview={false} className="ml-2 mt-2" src="/dots.gif" alt="Dot" width={40} />
         </div>
       )}
-      <div className="border-0 border-t border-solid border-th-grey-200 p-3 w-full">
+      <div className="border-0 border-t border-solid border-th-border p-3 w-full">
         <div className="w-full flex items-center justify-center relative">
           <Input.TextArea
             className="w-full max-h-[240px] overflow-auto pr-8"

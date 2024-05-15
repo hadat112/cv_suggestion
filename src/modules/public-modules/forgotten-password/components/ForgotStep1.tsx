@@ -1,6 +1,4 @@
-import { showMessage } from '@/components/common/messages/GMessage';
-import { APIResponse } from '@/interfaces';
-import { Form, Input, Button } from 'antd';
+import { Form } from 'antd';
 import React, { useCallback } from 'react';
 import { loginValidator } from '../../validation/login';
 import LoginInput from '../../components/LoginInput';
@@ -8,7 +6,6 @@ import LoginBtn from '../../components/LoginBtn';
 
 const ForgotStep1 = ({ setStep, setIdentity }) => {
   const [form] = Form.useForm();
-  const identity = Form.useWatch('identity', form);
 
   const showErr = useCallback(
     (text) => {
@@ -34,18 +31,14 @@ const ForgotStep1 = ({ setStep, setIdentity }) => {
       setIdentity(values?.identity);
       setStep((state) => state + 1);
     },
-    [setIdentity, setStep, showErr]
+    [setIdentity, setStep]
   );
 
   return (
-    <Form
-      className="flex flex-col items-center w-full gap-y-6 px-12 mt-6"
-      form={form}
-      onFinish={handleContinue}
-    >
-      <div className="text-center">Nhập số điện thoại hoặc emai của bạn để tiếp tục.</div>
+    <Form className="flex flex-col items-center w-full gap-y-6 px-12" form={form} onFinish={handleContinue}>
+      <div className="text-center">Please enter your username.</div>
       <Form.Item className="w-full m-0" name="identity" rules={[loginValidator]}>
-        <LoginInput placeholder="Số điện thoại hoặc email" />
+        <LoginInput placeholder="name@company.com" />
       </Form.Item>
       <Form.Item className="w-full m-0">
         <LoginBtn text="Tiếp tục" />

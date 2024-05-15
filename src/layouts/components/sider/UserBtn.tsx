@@ -1,12 +1,15 @@
 import { LogoutIcon } from '@/components/icons';
+import { useAuthStore } from '@/stores/auth';
 import { Avatar, Dropdown, MenuProps } from 'antd';
 import cn from 'classnames';
 
 export default function UserBtn({ collapsed }) {
+  const { handleLogout } = useAuthStore();
+
   const items: MenuProps['items'] = [
     {
       key: 'logout',
-      label: 'Đăng xuất',
+      label: 'Log out',
       icon: <LogoutIcon className="text-[1rem] inline-flex" />,
     },
   ];
@@ -22,7 +25,7 @@ export default function UserBtn({ collapsed }) {
           className: 'custom-menu-dropdown',
           onClick: (menuItem) => {
             if (menuItem.key === 'logout') {
-              // handleLogOut();
+              handleLogout();
             }
           },
         }}

@@ -1,5 +1,9 @@
 import { Button, Result } from 'antd';
 import Link from 'next/link';
+import { ReactElement } from 'react';
+import { NextPageWithLayout } from '../_app';
+import { useAuthStore } from '@/stores/auth';
+import DefaultLayout from '@/layouts/default';
 
 const NotFound = () => {
   return (
@@ -18,4 +22,14 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+const Page404: NextPageWithLayout = () => {
+  const { isAuthenticated } = useAuthStore();
+  if (!isAuthenticated) return <NotFound />;
+  return <DefaultLayout content={<NotFound />} />;
+};
+
+Page404.getLayout = function getLayout(page: ReactElement) {
+  return page;
+};
+
+export default Page404;

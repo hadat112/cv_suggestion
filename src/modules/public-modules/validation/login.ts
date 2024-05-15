@@ -1,15 +1,13 @@
 import * as yup from 'yup';
-import { isPassword, isPhoneNumber, isPhoneNumberOrEmail } from '../utils/function';
+import { isPassword } from '../utils/function';
 
 const createObject = {
-  identity: yup
-    .string()
-    .required('Vui lòng nhập tên đăng nhập')
-    .test(
-      'is-phone-number-or-email',
-      'Vui lòng nhập đúng định dạng email hoặc số điện thoại',
-      isPhoneNumberOrEmail
-    ),
+  identity: yup.string().required('Vui lòng nhập tên đăng nhập'),
+  // .test(
+  //   'is-phone-number-or-email',
+  //   'Vui lòng nhập đúng định dạng email hoặc số điện thoại',
+  //   isPhoneNumberOrEmail
+  // ),
   password: yup.string().required('Vui lòng nhập password'),
 };
 
@@ -22,14 +20,12 @@ export const loginValidator: any = {
 };
 
 const register = {
-  identity: yup
-    .string()
-    .required('Vui lòng nhập tên đăng nhập')
-    .test(
-      'is-phone-number-or-email',
-      'Vui lòng nhập đúng định dạng email hoặc số điện thoại',
-      isPhoneNumberOrEmail
-    ),
+  identity: yup.string().required('Vui lòng nhập tên đăng nhập'),
+  // .test(
+  //   'is-phone-number-or-email',
+  //   'Vui lòng nhập đúng định dạng email hoặc số điện thoại',
+  //   isPhoneNumberOrEmail
+  // ),
   password: yup
     .string()
     .required('Vui lòng nhập mật khẩu')

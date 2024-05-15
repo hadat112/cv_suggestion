@@ -12,7 +12,7 @@ export default function Dashboard() {
 
   return (
     <div className="h-full flex flex-col gap-4 md:gap-6 p-4">
-      <DateFilter setDate={setDate} title="Dashboard GAM BETA" />
+      <DateFilter setDate={setDate} title="DASHBOARD" />
       <div className="w-full grid gap-4 grid-cols-2 lg:grid-cols-4">
         <Card value={38} title="Tổng CV" />
         <Card value={formatNumber(2333)} title="Số CV có TA" />

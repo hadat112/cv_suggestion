@@ -2,6 +2,7 @@ import { AppleIcon, CHPlayIcon, ChatIcon, MoonIcon, SunIcon } from '@/components
 import { useTheme } from '@/configs/theme/provider';
 import cn from 'classnames';
 import { Image } from 'antd';
+import Link from 'next/link';
 
 const SwitchTheme = ({ checked, onChange }: { checked: boolean; onChange: () => void }) => {
   const Icon = checked ? MoonIcon : SunIcon;
@@ -30,9 +31,9 @@ export default function LoginHeader() {
 
   return (
     <div className="flex items-center px-3 py-2 bg-th-background gap-8 text-th-text text-sm">
-      <h1 className="flex-1 mb-0 flex items-center font-bold">
-        <Image preview={false} src="/Logo.gif" alt="" width={60} className="rounded-lg" />
-      </h1>
+      <Link className="flex-1 mb-0 flex items-center font-bold" href="/login">
+        <Image preview={false} src="/Logo.gif" alt="" width={60} className="rounded-lg dark:bg-white" />
+      </Link>
       <div className="flex gap-5 items-center justify-self-end">
         <span className="hidden md:block text-base">Available at</span>
         <div className="flex items-center gap-2 border border-solid border-th-border rounded-full px-2 py-1 font-medium">
@@ -46,7 +47,7 @@ export default function LoginHeader() {
         <div className="flex items-center gap-1">
           <ChatIcon />
           <span className="hidden md:flex">Need support?</span>
-          <a className="font-semibold text-th-primary">CHAT NOW!</a>
+          <a className="font-semibold text-th-primary text-xs">CHAT NOW!</a>
         </div>
         <div className="flex items-center gap-2" onClick={(e) => e?.stopPropagation()}>
           <SwitchTheme checked={theme === 'dark'} onChange={() => toggleTheme()} />
