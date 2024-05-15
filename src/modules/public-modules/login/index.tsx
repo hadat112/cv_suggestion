@@ -1,9 +1,7 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Checkbox, Form } from 'antd';
 import { loginValidator } from '../validation/login';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'next/router';
-import { APIResponse } from '@/interfaces';
-import { showMessage } from '@/components/common/messages/GMessage';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import LoginPasswordInput from '../components/LoginPasswordInput';
@@ -47,7 +45,7 @@ const LoginCard = () => {
 
   return (
     <>
-      <h1 className="text-2xl leading-8 font-bold mb-0 text-center">Sign in to your account</h1>
+      <h1 className="text-2xl leading-8 font-semibold text-center mb-6">Sign in to your account</h1>
       <Form
         form={form}
         layout="vertical"

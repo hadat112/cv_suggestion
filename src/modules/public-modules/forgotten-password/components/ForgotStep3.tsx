@@ -1,34 +1,33 @@
-import { Button, Form, Input } from 'antd';
+import { Form } from 'antd';
 import { useCallback, useState } from 'react';
 import { forgottenPasswordValidator } from '../../validation/login';
-import { showMessage } from '@/components/common/messages/GMessage';
-import { APIResponse } from '@/interfaces';
 import { useAuthStore } from '@/stores/auth';
 import { passwordRecommendMsg } from '../../constants';
+import LoginPasswordInput from '../../components/LoginPasswordInput';
+import LoginBtn from '../../components/LoginBtn';
 
-const ForgotStep3 = () => {
+const ForgotStep3 = ({ identity }) => {
   const [showExtra, setShowExtra] = useState({
     password: false,
   });
   const [form] = Form.useForm();
-  const password = Form.useWatch('password', form);
-  const confirm_password = Form.useWatch('confirm_password', form);
   const authenticate = useAuthStore((state) => state.authenticate);
 
-  const handleFinishUpdate = useCallback(
-    async (allValues) => {
-      // const { error }: APIResponse = await { error: '' };
-      // if (error) return showMessage.error(error);
+  const handleFinishUpdate = useCallback(async () => {
+    // const { error }: APIResponse = await { error: '' };
+    // if (error) return showMessage.error(error);
 
-      authenticate(true);
-      window.location.href = '/';
-    },
-    [authenticate]
-  );
+    authenticate(true);
+    window.location.href = '/';
+  }, [authenticate]);
+
+  const handleExtra = (show) => {
+    setShowExtra((state) => ({ ...state, password: show }));
+  };
 
   return (
     <Form
-      className="flex flex-col items-center w-full gap-y-6 px-12"
+      className="flex flex-col items-center w-full gap-y-6 px-12 login"
       onFinish={handleFinishUpdate}
       form={form}
     >
@@ -38,16 +37,11 @@ const ForgotStep3 = () => {
         name="password"
         rules={[forgottenPasswordValidator]}
       >
-        <Input.Password
+        <LoginPasswordInput
           autoFocus
-          onFocus={() => {
-            setShowExtra((state) => ({ ...state, password: true }));
-          }}
-          onBlur={() => {
-            setShowExtra((state) => ({ ...state, password: false }));
-          }}
-          className="rounded-full h-12 px-4 py-3 border-th-border placeholder:text-th-text-secondary password-input"
-          placeholder="Nhập mật khẩu mới"
+          onFocus={() => handleExtra(true)}
+          onBlur={() => handleExtra(false)}
+          placeholder="Enter your password!"
         />
       </Form.Item>
       <Form.Item
@@ -56,20 +50,10 @@ const ForgotStep3 = () => {
         dependencies={['password']}
         rules={[forgottenPasswordValidator]}
       >
-        <Input.Password
-          className="rounded-full h-12 px-4 py-3 border-th-border placeholder:text-th-text-secondary password-input"
-          placeholder="Nhập lại mật khẩu mới"
-        />
+        <LoginPasswordInput placeholder="Re-enter your password!" />
       </Form.Item>
       <Form.Item className="w-full m-0">
-        <Button
-          htmlType="submit"
-          type="primary"
-          className="rounded-full w-full h-12"
-          disabled={!password || !confirm_password}
-        >
-          Cập nhật
-        </Button>
+        <LoginBtn text="Cập nhật" />
       </Form.Item>
     </Form>
   );

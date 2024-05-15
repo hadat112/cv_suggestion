@@ -16,7 +16,7 @@ export const useAuthStore = create<IAuth>((set) => ({
   authenticate: (isAuthenticated) => set((state) => ({ ...state, isAuthenticated })),
   handleGetSession: async (pathname) => {
     try {
-      const res: APIResponse = await new Promise((resolve) => ({ error: 'fasd' }));
+      const res: APIResponse = await new Promise((resolve) => resolve({ error: 'fasd', status: 400 }));
 
       if (res.error && !PUBLIC_ROUTER.includes(pathname)) {
         localStorage.removeItem('access_token');
@@ -40,7 +40,8 @@ export const useAuthStore = create<IAuth>((set) => ({
   handleLogout: () => {
     if (typeof window === 'undefined') return;
     set((state) => ({ ...state, isAuthenticated: false }));
-    window.location.href = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/logout`;
+    // window.location.href = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/logout`;
+    window.location.href = `${process.env.NEXT_PUBLIC_APP_URL}/login`;
     localStorage.removeItem('access_token');
     localStorage.removeItem('identity');
     localStorage.removeItem('remember');

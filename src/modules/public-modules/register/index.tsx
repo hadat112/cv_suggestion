@@ -1,9 +1,7 @@
-import { Button, Form, Input } from 'antd';
+import { Form } from 'antd';
 import { registerValidator } from '../validation/login';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'next/router';
-import { APIResponse } from '@/interfaces';
-import { showMessage } from '@/components/common/messages/GMessage';
 import Link from 'next/link';
 import LoginInput from '../components/LoginInput';
 import LoginPasswordInput from '../components/LoginPasswordInput';
@@ -23,7 +21,7 @@ const RegisterCard = () => {
     ]);
   };
 
-  const handleRegister = async (allValues) => {
+  const handleRegister = async () => {
     // const { error, data }: APIResponse = await { data: { access_token: 'fadsf' } };
     // if (error) return showErr('password', error);
     // if (!data?.access_token) return showMessage.error('Login fail');
@@ -35,7 +33,7 @@ const RegisterCard = () => {
 
   return (
     <>
-      <h1 className="text-2xl leading-8 font-bold mb-0 text-center">Sign up your new account</h1>
+      <h1 className="text-2xl leading-8 font-semibold text-center mb-6">Sign up your new account</h1>
       <Form
         form={form}
         layout="vertical"

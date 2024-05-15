@@ -1,8 +1,7 @@
-import { Divider } from 'antd';
 import { useState } from 'react';
 import ForgotStep1 from './components/ForgotStep1';
-import ForgotStep2 from './components/ForgotStep2';
 import ForgotStep3 from './components/ForgotStep3';
+import Link from 'next/link';
 
 const ForgotPassword = () => {
   const [step, setStep] = useState(1);
@@ -10,10 +9,15 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <h1 className="text-2xl leading-8 font-bold mb-0 text-center">Quên mật khẩu</h1>
+      <h1 className="text-2xl leading-8 font-semibold text-center mb-6">Forgotten password</h1>
       {step === 1 && <ForgotStep1 setStep={setStep} setIdentity={setIdentity} />}
-      {step === 2 && <ForgotStep2 setStep={setStep} identity={identity} />}
-      {step === 3 && <ForgotStep3 />}
+      {step === 2 && <ForgotStep3 identity={identity} />}
+      <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-6">
+        Already have an account?{' '}
+        <Link href="/login" className="font-medium text-th-primary hover:underline">
+          Sign in
+        </Link>
+      </p>
     </>
   );
 };

@@ -31,8 +31,8 @@ const DateFilter = ({ setDate, title }) => {
       onValuesChange={handleValueChange}
     >
       <div className="flex items-center md:items-baseline gap-2 flex-col md:flex-row md:flex-wrap">
-        <h2 className="m-0">{title}</h2>
-        <i className="mb-6 md:m-0 text-sm ">Cập nhật lúc {dayjs().format('YYYY/MM/DD HH:mm:ss')}</i>
+        <h2 className="text-xl m-0">{title}</h2>
+        <i className="mb-6 md:m-0 text-xs ">Cập nhật lúc {dayjs().format('YYYY/MM/DD HH:mm:ss')}</i>
       </div>
       <Form.Item className="mb-0 w-full md:w-auto" name="rangeTime">
         <ResponsiveRangePicker allowClear={false} presets={rangePresets} className="w-full" />
