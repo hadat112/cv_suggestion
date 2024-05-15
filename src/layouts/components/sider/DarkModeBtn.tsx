@@ -15,7 +15,7 @@ export default function DarkModeBtn({ collapsed }) {
             !collapsed,
         })}
       >
-        {!collapsed && <span className="leading-6 whitespace-nowrap flex items-center">Dark Mode</span>}
+        {!collapsed && <span className="leading-6 whitespace-nowrap flex items-center">Theme</span>}
         <SwitchTheme checked={darkMode} onChange={toggleTheme} />
       </div>
     </div>

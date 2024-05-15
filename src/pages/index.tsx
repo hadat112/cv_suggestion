@@ -6,7 +6,7 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/cv-suggestion');
+    router.push('/dashboard');
   }, [router]);
 
   return (

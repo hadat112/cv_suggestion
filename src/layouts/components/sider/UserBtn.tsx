@@ -35,15 +35,15 @@ export default function UserBtn({ collapsed }) {
           })}
         >
           <Avatar
-            src="/fallback.png"
+            src="/avt.png"
             alt="avt"
             size="large"
             className="min-w-[40px] border border-solid border-th-border"
           />
           {!collapsed && (
             <div className="flex flex-col justify-center">
-              <p className="text-base font-bold mb-0 whitespace-nowrap">Ha Van Dat</p>
-              <p className="text-md mb-0 text-th-blue-grey">datha</p>
+              <p className="text-base font-semibold mb-0 whitespace-nowrap">Ha Van Dat</p>
+              <p className="text-md mb-0 text-th-text-hint">datha</p>
             </div>
           )}
         </div>
