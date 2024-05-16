@@ -33,7 +33,7 @@ const RegisterCard = () => {
 
   return (
     <>
-      <h1 className="text-2xl leading-8 font-semibold text-center mb-6">Sign up your new account</h1>
+      <h1 className="text-2xl leading-8 font-semibold text-center mb-6">Create your Free Account</h1>
       <Form
         form={form}
         layout="vertical"
@@ -55,11 +55,11 @@ const RegisterCard = () => {
           <LoginPasswordInput />
         </Form.Item>
         <Form.Item className="w-full m-0 mt-6">
-          <LoginBtn text="Register your account" />
+          <LoginBtn text="Create an account" />
         </Form.Item>
 
         <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-6">
-          Already have an account?{' '}
+          Already have an account?
           <Link href="/login" className="font-medium text-th-primary hover:underline">
             Sign in
           </Link>

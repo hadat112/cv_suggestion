@@ -1,5 +1,5 @@
 import { MoonIcon, SunIcon } from '@/components/icons';
-import { useTheme } from '@/configs/theme/provider';
+import { useTheme } from '@/providers/ThemeProvider';
 import cn from 'classnames';
 
 export default function DarkModeBtn({ collapsed }) {

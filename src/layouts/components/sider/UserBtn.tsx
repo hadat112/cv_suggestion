@@ -9,7 +9,7 @@ export default function UserBtn({ collapsed }) {
   const items: MenuProps['items'] = [
     {
       key: 'logout',
-      label: 'Log out',
+      label: 'Sign out',
       icon: <LogoutIcon className="text-[1rem] inline-flex" />,
     },
   ];
