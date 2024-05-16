@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { COLORS, COLOR_MODE, INITIAL_COLOR_MODE, ThemeDisplayName } from './themeConfig';
+import { COLORS, COLOR_MODE, INITIAL_COLOR_MODE, ThemeDisplayName } from '../configs/theme/themeConfig';
 import vn from 'antd/locale/vi_VN';
 import { ConfigProvider } from 'antd';
 import { theme as andtTheme } from 'antd';

@@ -1,8 +1,8 @@
 import { AppleIcon, CHPlayIcon, ChatIcon, MoonIcon, SunIcon } from '@/components/icons';
-import { useTheme } from '@/configs/theme/provider';
 import cn from 'classnames';
 import { Image } from 'antd';
 import Link from 'next/link';
+import { useTheme } from '@/providers/ThemeProvider';
 
 const SwitchTheme = ({ checked, onChange }: { checked: boolean; onChange: () => void }) => {
   const Icon = checked ? MoonIcon : SunIcon;

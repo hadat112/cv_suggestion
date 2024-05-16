@@ -1,22 +1,20 @@
+import { PUBLIC_ROUTER } from '@/constants/common';
 import { APIResponse } from '@/interfaces';
 import axios, { AxiosResponse, AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
-const REFRESH_URL = process.env.NEXT_PUBLIC_APP_URL;
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
+const REFRESH_URL = `${APP_URL}/api/auth/refresh_token`;
 const errorMessage = 'Có lỗi trong quá trình thực thi';
 
-const errorCallback = (status: number, dataError: any) => {
-  const message = dataError?.message || dataError?.error;
+const errorCallback = (status: number, dataError: any) => ({
+  status,
+  error: dataError?.message || dataError?.error,
+});
 
-  return { status, error: message || errorMessage };
-};
-
-const processQueue = (error: AxiosError | null, token = null) => {
-  failedQueue.forEach((item) => {
-    error ? item.reject(error) : item.resolve(token);
-  });
-
+const processQueue = (error?: AxiosError) => {
+  failedQueue.forEach(({ resolve, reject }) => (error ? reject(error) : resolve()));
   failedQueue = [];
 };
 
@@ -24,123 +22,82 @@ const handlePushToLogin = async () => {
   window.location.href = '/login';
 };
 
-const handle403Status = async (dataError, config) => {
-  if (config.url === `${REFRESH_URL}/api/auth/refresh_token`) {
-    handlePushToLogin();
-  }
-  return errorCallback(403, dataError);
-};
-
-const handleRefreshToken = async (config: InternalAxiosRequestConfig<any>, api: AxiosInstance) => {
-  return new Promise((resolve, reject) => {
+const stopRequest = async (config: InternalAxiosRequestConfig<any>, api: AxiosInstance) =>
+  new Promise((resolve, reject) => {
     failedQueue.push({ resolve, reject });
   })
-    .then(() => {
-      if (config) return api(config);
-    })
-    .catch((err) => {
-      return Promise.reject(err);
-    });
+    .then(() => config && api(config))
+    .catch((err) => Promise.reject(err));
+
+const handleRq = (config: any) => {
+  const token = localStorage.getItem('token') ?? '';
+  config.headers.Authorization = `Bearer ${token}`;
+
+  return config;
 };
+
+const handleResponeData = ({ data }: AxiosResponse) =>
+  data.success === false ? { ...data, status: 400, error: data?.message ?? errorMessage } : data;
+
+const handleRqErr = (error) => Promise.reject(error);
 
 class ApiClient {
   baseURL: string;
-  tokenType: string;
-  errorCb: (status: number, dataError: any) => void;
+  api: AxiosInstance;
 
-  constructor(baseURL?: string, tokenType?: string, errorCb = errorCallback) {
+  constructor(baseURL?: string) {
     this.baseURL = baseURL || '';
-    this.tokenType = tokenType || '';
-    this.errorCb = errorCb;
-  }
-
-  getInstance() {
-    const api: AxiosInstance = axios.create({
+    this.api = axios.create({
       baseURL: this.baseURL,
       timeout: 30000,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-Token-Source': 'SME',
-      },
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
     });
-
-    api.interceptors.request.use(
-      (config: any) => {
-        const token = localStorage.getItem('token') ?? '';
-
-        if (config.headers && this.tokenType) {
-          config.headers[this.tokenType] = `Bearer ${token}`;
-        }
-
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
-      }
-    );
-
-    api.interceptors.response.use(
-      (response: AxiosResponse) => {
-        const data = response.data;
-
-        if (data.success === false) {
-          const message = data?.message ?? errorMessage;
-          return { ...response.data, status: 400, error: message };
-        }
-
-        return response.data;
-      },
-      async (error: AxiosError) => {
-        const config = error.config;
-        const resError = error.response;
-        const dataError: any = resError?.data;
-
-        switch (resError?.status) {
-          case 500:
-            return this.errorCb(500, dataError);
-          case 403: {
-            return handle403Status(dataError, config);
-          }
-          case 401:
-            if (config.url === `${REFRESH_URL}/api/auth/refresh_token`) {
-              handlePushToLogin();
-              return this.errorCb(401, dataError);
-            }
-
-            // Handle if token is refreshing
-            if (isRefreshing) {
-              return handleRefreshToken(config, api);
-            }
-            isRefreshing = true;
-
-            const res: APIResponse<{
-              access_token: string;
-            }> = await api.get(`${REFRESH_URL}/api/auth/refresh_token`);
-
-            if (!res?.data?.access_token) {
-              processQueue(new AxiosError('Token hết hạn!'), null);
-              handlePushToLogin();
-            }
-
-            if (res?.data?.access_token) {
-              const { access_token } = res.data;
-              localStorage.setItem('token', access_token);
-              if (config)
-                return api(config).finally(() => {
-                  isRefreshing = false;
-                  processQueue(null, access_token);
-                });
-            }
-
-            return Promise.reject(error);
-          default:
-            return this.errorCb(500, dataError);
-        }
-      }
-    );
-    return api;
+    this.api.interceptors.request.use(handleRq, handleRqErr);
+    this.api.interceptors.response.use(handleResponeData, this.handleResponseError);
   }
+
+  handleResponseError = async (error: AxiosError) => {
+    const { config, response: resError } = error;
+    const dataError: any = resError?.data;
+    const isRefreshTokenErr = config.url === REFRESH_URL && !PUBLIC_ROUTER.includes(window.location.pathname);
+
+    switch (resError?.status) {
+      case 403:
+        isRefreshTokenErr && handlePushToLogin();
+        return errorCallback(403, dataError);
+
+      case 401:
+        if (isRefreshTokenErr) {
+          handlePushToLogin();
+          return errorCallback(401, dataError);
+        }
+
+        if (isRefreshing) return stopRequest(config, this.api);
+        isRefreshing = true;
+
+        const res: APIResponse = await this.api.get(REFRESH_URL);
+        const access_token = res?.data?.access_token;
+
+        if (!access_token) {
+          processQueue(new AxiosError('Token hết hạn!'));
+          handlePushToLogin();
+        } else {
+          localStorage.setItem('token', access_token);
+
+          if (config)
+            return this.api(config).finally(() => {
+              isRefreshing = false;
+              processQueue();
+            });
+        }
+
+        return Promise.reject(error);
+      default:
+        return errorCallback(500, dataError);
+    }
+  };
+
+  getInstance = () => this.api;
 }
 
 export default ApiClient;
