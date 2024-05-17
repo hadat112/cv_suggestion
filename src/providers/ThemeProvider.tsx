@@ -10,7 +10,6 @@ interface IThemeProviderProps {
 }
 
 interface IThemeContext {
-  // eslint-disable-next-line no-unused-vars
   toggleTheme?: (newTheme?: ThemeDisplayName) => void;
   theme?: ThemeDisplayName;
 }

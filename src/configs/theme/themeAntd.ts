@@ -1,6 +1,5 @@
 import { ThemeConfig } from 'antd';
 
-// eslint-disable-next-line no-unused-vars
 type antdTheme = (COLORS) => ThemeConfig;
 
 export const antdDefaultTheme: antdTheme = (COLORS) => ({

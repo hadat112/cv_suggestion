@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { APIResponse } from '@/interfaces';
 import { NextApiRequest, NextApiResponse } from 'next';
 

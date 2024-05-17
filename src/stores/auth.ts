@@ -4,10 +4,8 @@ import { create } from 'zustand';
 
 interface IAuth {
   isAuthenticated: boolean;
-  // eslint-disable-next-line no-unused-vars
   authenticate: (isAuthenticated) => void;
   handleLogout: () => void;
-  // eslint-disable-next-line no-unused-vars
   handleGetSession: (pathname) => void;
 }
 
