@@ -6,7 +6,7 @@ import LoginPasswordInput from '../../components/LoginPasswordInput';
 import { passwordRecommendMsg } from '../../constants';
 import { forgottenPasswordValidator } from '../../validation/login';
 
-const ForgotStep3 = ({ _identity }) => {
+const ForgotStep3 = ({ identity }) => {
   const [showExtra, setShowExtra] = useState({
     password: false,
   });

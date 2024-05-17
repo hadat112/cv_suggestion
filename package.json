@@ -39,14 +39,11 @@
     "lint-staged": "^13.1.2",
     "postcss": "^8.4.21",
     "sass": "^1.58.2",
-    "stylelint": "^15.1.0",
-    "stylelint-config-prettier-scss": "^0.0.1",
-    "stylelint-config-standard-scss": "^7.0.1",
     "ts-node": "^10.9.2"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,scss}": [
-      "biome check --staged --apply"
+      "biome check --staged --apply ./src"
     ]
   },
   "engines": {
