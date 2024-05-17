@@ -1,14 +1,19 @@
-export const getConfig = () => {
-  const baseConfig = {
-    appUrl: process.env.NEXT_PUBLIC_APP_URL || '',
-    issuer: process.env.NEXT_PUBLIC_BE,
-    redirectUri: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/callback`,
-    cookieOptions: {
-      secure: true,
-      sameSite: 'strict',
-      path: '/',
-      httpOnly: true,
-    },
-  };
-  return baseConfig;
+export const BASE_CONFIGS = {
+  appUrl: process.env.NEXT_PUBLIC_APP_URL || '',
+  issuer: `${process.env.NEXT_PUBLIC_OIDC_ISSUER}/realms/HD/protocol/openid-connect`,
+  redirect_uri: process.env.OIDC_REDIRECT_URI,
+  client_id: process.env.OIDC_CLIENT_ID,
+  client_secret: process.env.OIDC_CLIENT_SECRET,
+  redirectUriLogout: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/login`,
+  authorizationParams: {
+    response_type: 'code',
+    response_mode: 'query',
+    scope: 'openid offline_access',
+  },
+  cookieOptions: {
+    secure: true,
+    sameSite: 'strict',
+    path: '/',
+    httpOnly: true,
+  },
 };
