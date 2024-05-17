@@ -1,7 +1,7 @@
-import { NAV_ITEMS } from './navitems';
 import { Menu, MenuProps } from 'antd';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { NAV_ITEMS } from './navitems';
 
 export default function Navbar({ onChangePage }) {
   const router = useRouter();

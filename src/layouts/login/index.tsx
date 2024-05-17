@@ -1,7 +1,7 @@
-import React from 'react';
-import LoginHeader from './components/LoginHeader';
 import Image from 'next/image';
+import React from 'react';
 import LoginBackground from '../../../public/login-bg.png';
+import LoginHeader from './components/LoginHeader';
 
 const LoginLayout = ({ content }) => {
   return (
@@ -9,7 +9,7 @@ const LoginLayout = ({ content }) => {
       <div className="overflow-x-hidden overflow-y-auto flex flex-col flex-1">
         <LoginHeader />
         <div className="flex flex-col flex-1 relative">
-          <Image className="z-1 bg-opacity " src={LoginBackground} placeholder="blur" alt="img" fill />
+          <Image className="z-1 bg-opacity " src={LoginBackground} placeholder="blur" alt="img" fill={true} />
           <div
             className="login z-10 absolute top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center
           rounded-xl bg-th-background h-fit my-auto p-8 mx-auto max-w-[90vw]

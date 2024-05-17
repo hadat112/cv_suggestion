@@ -1,5 +1,5 @@
 import { COLORS, COLOR_MODE, INITIAL_COLOR_MODE } from '@/configs/theme/themeConfig';
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Head, Html, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
 function setColorsByTheme() {
@@ -46,6 +46,7 @@ export default function Document() {
         <Script
           id="inline-script"
           strategy="beforeInteractive"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
           dangerouslySetInnerHTML={{
             __html: `(${injectedFn})()`,
           }}

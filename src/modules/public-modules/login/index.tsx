@@ -1,12 +1,12 @@
-import { Checkbox, Form } from 'antd';
-import { loginValidator } from '../validation/login';
 import { useAuthStore } from '@/stores/auth';
+import { Checkbox, Form } from 'antd';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import Link from 'next/link';
-import LoginPasswordInput from '../components/LoginPasswordInput';
-import LoginInput from '../components/LoginInput';
 import LoginBtn from '../components/LoginBtn';
+import LoginInput from '../components/LoginInput';
+import LoginPasswordInput from '../components/LoginPasswordInput';
+import { loginValidator } from '../validation/login';
 
 const LoginCard = () => {
   const router = useRouter();
@@ -19,14 +19,14 @@ const LoginCard = () => {
     form.setFieldsValue({ identity, remember });
   }, [form]);
 
-  const showErr = (field, text) => {
-    form.setFields([
-      {
-        name: field,
-        errors: [text],
-      },
-    ]);
-  };
+  // const showErr = (field, text) => {
+  //   form.setFields([
+  //     {
+  //       name: field,
+  //       errors: [text],
+  //     },
+  //   ]);
+  // };
 
   const handleLogin = async (allValues) => {
     // const { error, data }: APIResponse = await { data: { access_token: 'fadsf' } };

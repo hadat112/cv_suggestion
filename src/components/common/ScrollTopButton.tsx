@@ -1,6 +1,6 @@
-import { useState, forwardRef, useEffect, MutableRefObject } from 'react';
 import { Button } from 'antd';
 import cx from 'classnames';
+import { MutableRefObject, forwardRef, useEffect, useState } from 'react';
 import { ArrowUpIcon } from '../icons';
 
 interface IProps {

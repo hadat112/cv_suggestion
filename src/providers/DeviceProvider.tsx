@@ -27,7 +27,7 @@ export const DeviceProvider: React.FC<IDeviceProviderProps> = ({ defaultDeviceTy
       width,
       height,
     }),
-    [deviceType, height, width]
+    [deviceType, height, width],
   );
 
   return <DeviceContext.Provider value={value}>{children}</DeviceContext.Provider>;

@@ -1,18 +1,18 @@
-import { Form } from 'antd';
-import { registerValidator } from '../validation/login';
 import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'next/router';
+import { Form } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import LoginBtn from '../components/LoginBtn';
 import LoginInput from '../components/LoginInput';
 import LoginPasswordInput from '../components/LoginPasswordInput';
-import LoginBtn from '../components/LoginBtn';
+import { registerValidator } from '../validation/login';
 
 const RegisterCard = () => {
   const router = useRouter();
   const authenticate = useAuthStore((state) => state.authenticate);
   const [form] = Form.useForm();
 
-  const showErr = (field, text) => {
+  const _showErr = (field, text) => {
     form.setFields([
       {
         name: field,

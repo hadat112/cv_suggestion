@@ -1,7 +1,7 @@
+import DefaultLayout from '@/layouts/default';
+import CvSuggestion from '@/modules/cv-suggestion';
 import React, { ReactElement } from 'react';
 import { NextPageWithLayout } from './_app';
-import CvSuggestion from '@/modules/cv-suggestion';
-import DefaultLayout from '@/layouts/default';
 
 const CvSuggestionPage: NextPageWithLayout = () => {
   return <CvSuggestion />;

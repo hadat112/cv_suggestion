@@ -1,9 +1,9 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { COLORS, COLOR_MODE, INITIAL_COLOR_MODE, ThemeDisplayName } from '../configs/theme/themeConfig';
-import vn from 'antd/locale/vi_VN';
+import { antdDefaultTheme } from '@/configs/theme/themeAntd';
 import { ConfigProvider } from 'antd';
 import { theme as andtTheme } from 'antd';
-import { antdDefaultTheme } from '@/configs/theme/themeAntd';
+import vn from 'antd/locale/vi_VN';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { COLORS, COLOR_MODE, INITIAL_COLOR_MODE, ThemeDisplayName } from '../configs/theme/themeConfig';
 
 interface IThemeProviderProps {
   children: React.ReactNode;
@@ -48,7 +48,7 @@ const ThemeProvider: React.FC<IThemeProviderProps> = ({ children }) => {
       if (newTheme === 'dark') root.classList.add(newTheme);
       else root.classList.remove('dark');
     },
-    [theme]
+    [theme],
   );
 
   const contextValue: IThemeContext = useMemo(() => ({ toggleTheme, theme }), [theme, toggleTheme]);

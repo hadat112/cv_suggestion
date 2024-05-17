@@ -16,7 +16,7 @@ export const MessageAttachment = ({ attachments }) => {
             )}
 
             {attachment?.ext === 'mp4' && (
-              <video width="400" controls>
+              <video width="400" controls={true}>
                 <source src={attachment?.url} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>

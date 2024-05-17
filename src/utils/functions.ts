@@ -19,7 +19,7 @@ export function convertToOptions(
   collection: any[],
   valueKey: string,
   labelKey: string | string[],
-  separator?: string
+  separator?: string,
 ) {
   if (!Array.isArray(collection)) return [];
 
@@ -75,7 +75,7 @@ export function normalizeText(str: string) {
   return str
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[\p{M}]/gu, '')
     .replace(/đ/g, 'd')
     .replace(/Đ/g, 'D');
 }

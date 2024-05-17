@@ -1,7 +1,7 @@
+import Link from 'next/link';
 import { useState } from 'react';
 import ForgotStep1 from './components/ForgotStep1';
 import ForgotStep3 from './components/ForgotStep3';
-import Link from 'next/link';
 
 const ForgotPassword = () => {
   const [step, setStep] = useState(1);

@@ -1,16 +1,16 @@
+import { getConfig } from './config';
 /* eslint-disable no-unused-vars */
 import {
+  handleCallback,
   handleLogin,
+  handleLoginWith3rdParty,
   handleLogout,
   handleRefreshToken,
   handlerBuilder,
-  handleLoginWith3rdParty,
-  handleCallback,
 } from './handler';
-import AuthClient from './service/AuthClient';
-import { AuthInstance } from './interfaces';
 import handleGetSession from './handler/getSession';
-import { getConfig } from './config';
+import { AuthInstance } from './interfaces';
+import AuthClient from './service/AuthClient';
 
 let instance: AuthInstance;
 

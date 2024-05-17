@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { ErrorFallback } from './components/ErrorFallback';
-import { Spin } from 'antd';
-import { useAuthStore } from '@/stores/auth';
 import { PRIVATE_ROUTER, PUBLIC_ROUTER } from '@/constants/common';
+import { useAuthStore } from '@/stores/auth';
+import { Spin } from 'antd';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { ErrorFallback } from './components/ErrorFallback';
 
 interface Props {
   children: React.ReactNode;

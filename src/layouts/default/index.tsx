@@ -1,10 +1,10 @@
-import { type ReactElement, useRef, useState, useEffect } from 'react';
-import SiderBar from '../components/sider';
 import Author from '@/components/auth/Author';
 import { MenuIcon } from '@/components/icons';
-import ScrollTopButton from '../components/ScrollToTop';
-import { Layout } from 'antd';
 import { useDevice } from '@/providers/DeviceProvider';
+import { Layout } from 'antd';
+import { type ReactElement, useEffect, useRef, useState } from 'react';
+import ScrollTopButton from '../components/ScrollToTop';
+import SiderBar from '../components/sider';
 const { Content } = Layout;
 interface IProps {
   content: ReactElement;

@@ -1,6 +1,6 @@
-import React from 'react';
 import { Button, Result, Typography } from 'antd';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 interface Props {
   error: Error;

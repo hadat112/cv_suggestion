@@ -27,7 +27,7 @@ export const openPopupWindow = (
   windowName: string,
   win: Window,
   w: number = 500,
-  h: number = 700
+  h: number = 700,
 ): Window => {
   const y = win.outerHeight / 2 + win.screenY - h / 2;
   const x = win.outerWidth / 2 + win.screenX - w / 2;
@@ -37,7 +37,7 @@ export const openPopupWindow = (
     `width=${w}, 
       height=${h}, 
       top=${y}, 
-      left=${x}`
+      left=${x}`,
   );
 };
 

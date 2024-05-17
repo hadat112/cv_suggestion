@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getCookie } from '../utils/functions';
 import { DefaultHandler } from '../interfaces';
+import { getCookie } from '../utils/functions';
 
 export default function handleLogout({ baseConfig, getClient }: DefaultHandler) {
   const { cookieOptions } = baseConfig;
