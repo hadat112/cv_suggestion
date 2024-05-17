@@ -1,37 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { DefaultHandler } from '../interfaces';
-import { getCookie } from '../utils/functions';
+import { BASE_CONFIGS } from '../config';
+import { AUTH_ROUTES } from '../service/routes';
+import { toQueryParams } from '../utils/functions';
 
-export default function handleLogin({ baseConfig, getClient }: DefaultHandler) {
-  const client = getClient();
-  const { cookieOptions } = baseConfig;
+export default function handleLogin() {
+  const { issuer, client_id, redirect_uri, authorizationParams } = BASE_CONFIGS;
 
   return async (req: NextApiRequest, res: NextApiResponse) => {
-    const { identity, password, type, otp } = req.body || {};
-
     const params = {
-      identity,
-      password,
-      otp,
+      ...authorizationParams,
+      client_id,
+      redirect_uri,
+      state: JSON.stringify({ current: req.query?.current }),
     };
 
-    let response;
-    if (type === 'basic') response = await client.basicLogin(params);
-    else response = await client.otpLogin(params);
+    const authorizeUrl = AUTH_ROUTES.AUTH + toQueryParams(params);
+    const baseURL = issuer + authorizeUrl;
 
-    if (response?.error) res.status(response.status).json(response);
-    if (response?.data) {
-      // Set new tokens in cookie
-      const rtCookie = getCookie('rt', cookieOptions, response?.data?.refresh_token);
-      const atCookie = getCookie('at', cookieOptions, response?.data?.access_token);
-
-      res.setHeader('Set-Cookie', [rtCookie, atCookie]);
-      res.status(200).json({
-        data: {
-          access_token: response?.data?.access_token,
-        },
-        success: true,
-      });
-    }
+    res.redirect(baseURL);
   };
 }

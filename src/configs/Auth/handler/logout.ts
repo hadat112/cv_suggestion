@@ -1,24 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { DefaultHandler } from '../interfaces';
-import { getCookie } from '../utils/functions';
+import { BASE_CONFIGS } from '../config';
+import { IAuthClient } from '../interfaces';
+import { AUTH_ROUTES } from '../service/routes';
+import { getCookie, toQueryParams } from '../utils/functions';
 
-export default function handleLogout({ baseConfig, getClient }: DefaultHandler) {
-  const { cookieOptions } = baseConfig;
-  const client = getClient();
+export default function handleLogout() {
+  const { cookieOptions, issuer } = BASE_CONFIGS;
 
-  return async (req: NextApiRequest, res: NextApiResponse) => {
-    const rt = req.cookies?.rt;
-    const at = req.cookies?.at;
-    // Revoke tokens before logout
-    const revokeQueue = [client.revokeToken({ token: at })];
-
-    if (rt) revokeQueue.push(client.revokeToken({ token: rt }));
-    Promise.all(revokeQueue);
+  return async (_req: NextApiRequest, res: NextApiResponse) => {
+    const authorizeUrl = AUTH_ROUTES.LOGOUT;
 
     const rtCookie = getCookie('rt', cookieOptions);
     const atCookie = getCookie('at', cookieOptions);
     res.setHeader('set-cookie', [rtCookie, atCookie]);
 
-    res.redirect('/login');
+    res.redirect(issuer + authorizeUrl);
   };
 }

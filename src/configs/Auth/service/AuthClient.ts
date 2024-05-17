@@ -1,117 +1,78 @@
-import { APIResponse } from '@/interfaces';
 import axios, { AxiosResponse, AxiosInstance, AxiosError } from 'axios';
+import { BASE_CONFIGS } from '../config';
 import { IAuthClient, ITokenParams } from '../interfaces';
 import { AUTH_ROUTES } from './routes';
 
-const errorCallback = (status: number, error: string) => {
-  return { status, error };
+const ERR_MSG = 'Có lỗi trong quá trình thực thi';
+const errorCallback = (status: number, { message, error }) => ({
+  status,
+  error: message || error,
+});
+const headers = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
 };
 
-export const AuthClient = (issuer?: string) => {
-  const baseURL: string = issuer || '';
+const { client_id, redirect_uri, authorizationParams, client_secret } = BASE_CONFIGS;
 
-  const _getInstance = () => {
-    const api: AxiosInstance = axios.create({
-      baseURL: baseURL,
-      timeout: 30000,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-Token-Source': 'SME',
-      },
-    });
-
-    api.interceptors.request.use(
-      (config: any) => {
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
-      },
-    );
-
-    api.interceptors.response.use(
-      (response: AxiosResponse) => {
-        const data = response.data;
-        if (data.success === false) {
-          const message = typeof data?.message === 'string' ? data?.message : '';
-          return { ...response.data, status: 400, error: message || 'Có lỗi trong quá trình thực thi' };
-        }
-
-        return response.data;
-      },
-      async (error: AxiosError) => {
-        const resError = error.response;
-        const dataError: any = resError?.data;
-
-        return errorCallback(
-          resError?.status,
-          (resError && (dataError?.message || dataError?.error)) || 'Có lỗi trong quá trình thực thi',
-        );
-      },
-    );
-    return api;
-  };
-
-  const getClient = (): IAuthClient => {
-    const api = _getInstance();
-
+const buildTokenParams = ({ token, tokenType }: ITokenParams) => {
+  if (tokenType === 'access_token')
     return {
-      refreshToken(params: { refresh_token: string }): Promise<APIResponse<any>> {
-        return api.post(`${AUTH_ROUTES.REFRESH_TOKEN}`, params);
-      },
-
-      basicLogin(params: { identity: string; password: string }) {
-        return api.post(`${AUTH_ROUTES.BASIC_LOGIN}`, params);
-      },
-
-      otpLogin(params: { identity: string; otp: string }) {
-        return api.post(`${AUTH_ROUTES.OTP_LOGIN}`, { identity: params?.identity, otp: params?.otp });
-      },
-
-      googleLogin(params: {
-        authorization_code: 'string';
-        user_type: 'SHOP' | 'SHOP_STAFF';
-        phone?: 'string';
-        redirect_uri: 'string';
-      }) {
-        return api.post(`${AUTH_ROUTES.GOOGLE_LOGIN}`, params, {
-          headers: {
-            'X-Platform-Type': 'WEB',
-          },
-        });
-      },
-
-      facebookLogin(params: {
-        authorization_code: 'string';
-        user_type: 'SHOP' | 'SHOP_STAFF';
-        phone?: 'string';
-        redirect_uri: 'string';
-      }) {
-        return api.post(`${AUTH_ROUTES.FACEBOOK_LOGIN}`, params, {
-          headers: {
-            'X-Platform-Type': 'WEB',
-          },
-        });
-      },
-
-      revokeToken(params: ITokenParams): Promise<{
-        error?: string;
-        status?: number;
-        message: string;
-      }> {
-        return api.delete(`${AUTH_ROUTES.REVOKE_TOKEN}`, { params });
-      },
-
-      introspectToken(params: ITokenParams): Promise<APIResponse<any>> {
-        return api.post(`${AUTH_ROUTES.INTROSPECT_TOKEN}`, params);
-      },
+      client_id,
+      redirect_uri,
+      code: token,
+      grant_type: 'authorization_code',
     };
-  };
 
   return {
-    getClient,
+    client_id,
+    scope: authorizationParams?.scope,
+    refresh_token: token,
+    grant_type: 'refresh_token',
   };
 };
 
-export default AuthClient;
+const buildHeaders = () => {
+  const clientAuthentication = Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toString('base64');
+
+  return {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: `Basic ${clientAuthentication}`,
+  };
+};
+
+const getAuthClient: (issuer: string) => IAuthClient = (issuer = '') => {
+  const api: AxiosInstance = axios.create({
+    baseURL: issuer,
+    timeout: 30000,
+    headers,
+  });
+
+  api.interceptors.request.use(
+    (config) => config,
+    (error) => Promise.reject(error),
+  );
+
+  api.interceptors.response.use(
+    ({ data }: AxiosResponse) => data,
+    ({ response }: AxiosError) =>
+      errorCallback(response?.status, (response?.data as any) || { error: ERR_MSG }),
+  );
+
+  return {
+    getToken: ({ token, tokenType }: ITokenParams) => {
+      const params = buildTokenParams({ tokenType, token });
+      const headers = buildHeaders();
+
+      return api.post(`${AUTH_ROUTES.TOKEN}`, params, {
+        headers,
+      });
+    },
+
+    refreshToken: (params: ITokenParams) => api.post(`${AUTH_ROUTES.TOKEN}`, params),
+    logout: () => api.get(AUTH_ROUTES.LOGOUT),
+    introspectToken: (params: ITokenParams) => api.post(`${AUTH_ROUTES.INTROSPECT_TOKEN}`, params),
+  };
+};
+
+export default getAuthClient;

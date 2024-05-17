@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { DefaultHandler } from '../interfaces';
+import { IAuthClient } from '../interfaces';
 import handleRefreshToken from './refreshToken';
 
-export default function handleGetSession({ getClient, baseConfig }: DefaultHandler) {
+export default function handleGetSession(client: IAuthClient) {
   const errorMessage = { message: 'Invalid session', success: false };
 
   return async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,15 +13,16 @@ export default function handleGetSession({ getClient, baseConfig }: DefaultHandl
       return;
     }
 
-    // const decoded: any = jwt.decode(accessToken);
-    // const timenow = new Date().getTime();
-    // const expTime = new Date(decoded?.exp * 1000).getTime();
+    // const params = {
+    //   token: accessToken,
+    //   tokenType: "access_token" as const,
+    // };
 
     // // Check if access token is valid
-    // if (!decoded || expTime < timenow) {
-    //   return handleRefreshToken({ getClient, baseConfig })(req, res);
-    // }
-    handleRefreshToken({ getClient, baseConfig })(req, res);
+    // const atCheckRes = await client.introspectToken(params);
+    // console.log(atCheckRes);
+
+    // handleRefreshToken(client)(req, res);
     res.status(200).json({
       data: {
         access_token: accessToken,

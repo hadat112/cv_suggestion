@@ -5,9 +5,7 @@
   "scripts": {
     "postinstall": "[ \"$NODE_ENV\" = production ] && exit 0; husky install",
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "predev": "cross-env NODE_ENV=development ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx",
     "build": "NODE_ENV=production next build --no-lint",
-    "prebuild": "cross-env NODE_ENV=production ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx",
     "start": "next start",
     "types-check": "tsc --pretty --noEmit",
     "lint-staged": "lint-staged"
@@ -34,7 +32,7 @@
   "devDependencies": {
     "@ant-design/static-style-extract": "^1.0.2",
     "@biomejs/biome": "1.7.3",
-    "cross-env": "^7.0.3",
+    "cross-env": "7.0.3",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "postcss": "^8.4.38",
@@ -42,7 +40,9 @@
     "ts-node": "^10.9.2"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,scss}": ["biome check --staged --apply ./src"]
+    "*.{js,jsx,ts,tsx,css,scss}": [
+      "biome check --staged --apply ./src"
+    ]
   },
   "engines": {
     "node": ">=18.17.1"

@@ -1,4 +1,3 @@
-import { PUBLIC_ROUTER } from '@/constants/common';
 import { APIResponse } from '@/interfaces';
 import axios, { AxiosResponse, AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
 let isRefreshing = false;
@@ -36,10 +35,10 @@ const handleRq = (config: any) => {
   return config;
 };
 
+const handleRqErr = (error) => Promise.reject(error);
+
 const handleResponeData = ({ data }: AxiosResponse) =>
   data.success === false ? { ...data, status: 400, error: data?.message ?? errorMessage } : data;
-
-const handleRqErr = (error) => Promise.reject(error);
 
 class ApiClient {
   baseURL: string;
@@ -59,7 +58,7 @@ class ApiClient {
   handleResponseError = async (error: AxiosError) => {
     const { config, response: resError } = error;
     const dataError: any = resError?.data;
-    const isRefreshTokenErr = config.url === REFRESH_URL && !PUBLIC_ROUTER.includes(window.location.pathname);
+    const isRefreshTokenErr = config.url === REFRESH_URL;
 
     switch (resError?.status) {
       case 403:

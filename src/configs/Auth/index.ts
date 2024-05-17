@@ -1,15 +1,8 @@
-import { getConfig } from './config';
-import {
-  handleCallback,
-  handleLogin,
-  handleLoginWith3rdParty,
-  handleLogout,
-  handleRefreshToken,
-  handlerBuilder,
-} from './handler';
+import { BASE_CONFIGS } from './config';
+import { handleCallback, handleLogin, handleLogout, handleRefreshToken, handlerBuilder } from './handler';
 import handleGetSession from './handler/getSession';
-import { AuthInstance } from './interfaces';
-import AuthClient from './service/AuthClient';
+import { AuthInstance, IAuthClient } from './interfaces';
+import getAuthClient from './service/AuthClient';
 
 let instance: AuthInstance;
 
@@ -20,22 +13,15 @@ function getInstance() {
 }
 
 function _initAuth() {
-  const baseConfig = getConfig();
-  const { getClient } = AuthClient(`${baseConfig.issuer}/iam/api/v1`);
-  const defaultParams = { baseConfig, getClient };
+  const client: IAuthClient = getAuthClient(BASE_CONFIGS.issuer);
 
-  const handleAuth = handlerBuilder({
-    handleLogin: handleLogin(defaultParams),
-    handleCallback: handleCallback(defaultParams),
-    handleLoginWith3rdParty: handleLoginWith3rdParty(defaultParams),
-    handleLogout: handleLogout(defaultParams),
-    handleRefreshToken: handleRefreshToken(defaultParams),
-    handleGetSession: handleGetSession(defaultParams),
+  return handlerBuilder({
+    handleLogin: handleLogin(),
+    handleCallback: handleCallback(client),
+    handleLogout: handleLogout(),
+    handleRefreshToken: handleRefreshToken(client),
+    handleGetSession: handleGetSession(client),
   });
-
-  return {
-    handleAuth,
-  };
 }
 
-export const handleAuth = () => getInstance().handleAuth;
+export const handleAuth = () => getInstance();

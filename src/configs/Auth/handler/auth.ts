@@ -6,7 +6,7 @@ type ApiHandlerProps = {
   [key: string]: NextApiHandler;
 };
 
-type ApiEntryNames = 'login' | 'logout' | 'refresh_token' | 'session' | 'login-with-3rd-party' | 'callback';
+type ApiEntryNames = 'login' | 'logout' | 'refresh_token' | 'session' | 'callback';
 
 type ApiHandlers = Partial<Record<ApiEntryNames, NextApiHandler>>;
 
@@ -20,7 +20,6 @@ export default function handlerBuilder({
   handleLogout,
   handleRefreshToken,
   handleGetSession,
-  handleLoginWith3rdParty,
   handleCallback,
 }: ApiHandlerProps) {
   return async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -30,11 +29,9 @@ export default function handlerBuilder({
       refresh_token: handleRefreshToken,
       session: handleGetSession,
       callback: handleCallback,
-      'login-with-3rd-party': handleLoginWith3rdParty,
     };
 
     let { auth: route } = req.query;
-
     if (Array.isArray(route)) {
       let otherRoutes;
       [route, ...otherRoutes] = route;
