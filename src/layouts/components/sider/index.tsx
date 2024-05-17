@@ -1,9 +1,9 @@
 import { Layout } from 'antd';
+import AppBranch from './AppBranch';
+import DarkModeBtn from './DarkModeBtn';
 import Navbar from './Navbar';
 import Trigger from './Trigger';
-import AppBranch from './AppBranch';
 import UserBtn from './UserBtn';
-import DarkModeBtn from './DarkModeBtn';
 const { Sider } = Layout;
 
 export default function SiderBar({ setCollapsed, collapsed, isMobile }) {
@@ -23,7 +23,7 @@ export default function SiderBar({ setCollapsed, collapsed, isMobile }) {
       width={280}
       collapsedWidth={isMobile ? 0 : 64}
       defaultCollapsed={false}
-      collapsible
+      collapsible={true}
       collapsed={collapsed}
     >
       <AppBranch

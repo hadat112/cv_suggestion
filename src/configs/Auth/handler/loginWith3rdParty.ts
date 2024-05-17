@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { toQueryParams } from '../utils/functions';
 import { DefaultHandler } from '../interfaces';
+import { toQueryParams } from '../utils/functions';
 
 export default function handleLoginByGoogle({ baseConfig }: DefaultHandler) {
   const { redirectUri } = baseConfig;

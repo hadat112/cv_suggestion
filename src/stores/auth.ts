@@ -31,7 +31,7 @@ export const useAuthStore = create<IAuth>((set) => ({
         if (PUBLIC_ROUTER.includes(pathname)) window.location.href = '/';
         return;
       }
-    } catch (error) {
+    } catch (_error) {
       if (PUBLIC_ROUTER.includes(pathname)) return;
       localStorage.removeItem('access_token');
       window.location.href = '/login';

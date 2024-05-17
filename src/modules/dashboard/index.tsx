@@ -1,11 +1,11 @@
 import { formatNumber } from '@/utils/functions';
-import { Card } from './components/Card';
-import { useState } from 'react';
-import DateFilter from './components/DateFilter';
 import dayjs from 'dayjs';
+import { useState } from 'react';
+import { Card } from './components/Card';
+import DateFilter from './components/DateFilter';
 
 export default function Dashboard() {
-  const [date, setDate] = useState({
+  const [_date, setDate] = useState({
     from: dayjs(),
     to: dayjs().startOf('month'),
   });

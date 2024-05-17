@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { APIResponse } from '@/interfaces';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { DefaultHandler, IToken } from '../interfaces';
 import { getCookie, toQueryParams } from '../utils/functions';
 
@@ -88,7 +88,7 @@ export default function handleCallback({ baseConfig, getClient }: DefaultHandler
         const facebookAccessTokenCookie = getCookie(
           'facebookAccessToken',
           cookieOptions,
-          response?.data?.facebook_access_token
+          response?.data?.facebook_access_token,
         );
 
         res.setHeader('set-cookie', [verifyTokenCookie, facebookAccessTokenCookie]);

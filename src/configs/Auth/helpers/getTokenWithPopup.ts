@@ -28,7 +28,7 @@ export default function getTokenWithPopup(): Promise<string> | undefined {
       },
       {
         signal: abortController.signal,
-      }
+      },
     );
   })
     .then((token) => {

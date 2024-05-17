@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Avatar, Image, Input } from 'antd';
 import { Send } from '@/components/icons';
+import { Avatar, Image, Input } from 'antd';
+import React, { useState } from 'react';
 import MessagesList from './components/MessagesList';
 
 const CvSuggestion = () => {
@@ -36,8 +36,8 @@ const CvSuggestion = () => {
           <Input.TextArea
             className="w-full max-h-[240px] overflow-auto pr-8"
             placeholder="Nhập mô tả công việc cần tuyển dụng!"
-            autoSize
-            autoFocus
+            autoSize={true}
+            autoFocus={true}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

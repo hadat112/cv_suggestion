@@ -33,15 +33,11 @@
   },
   "devDependencies": {
     "@ant-design/static-style-extract": "^1.0.2",
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@biomejs/biome": "1.7.3",
     "cross-env": "^7.0.3",
-    "eslint": "^8.46.0",
-    "eslint-config-next": "^13.4.19",
-    "eslint-config-prettier": "^8.6.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
     "postcss": "^8.4.21",
-    "prettier": "^2.8.4",
     "sass": "^1.58.2",
     "stylelint": "^15.1.0",
     "stylelint-config-prettier-scss": "^0.0.1",
@@ -50,13 +46,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,scss}": [
-      "prettier --write --list-different \"src/**/*+(js|jsx|ts|tsx|scss)\""
-    ],
-    "*.{css,scss}": [
-      "npx stylelint"
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "npx eslint -c .eslintrc.json --fix"
+      "biome check --staged --apply"
     ]
   },
   "engines": {

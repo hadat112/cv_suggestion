@@ -1,13 +1,13 @@
 import { Form } from 'antd';
 import React, { useCallback } from 'react';
-import { loginValidator } from '../../validation/login';
-import LoginInput from '../../components/LoginInput';
 import LoginBtn from '../../components/LoginBtn';
+import LoginInput from '../../components/LoginInput';
+import { loginValidator } from '../../validation/login';
 
 const ForgotStep1 = ({ setStep, setIdentity }) => {
   const [form] = Form.useForm();
 
-  const showErr = useCallback(
+  const _showErr = useCallback(
     (text) => {
       form.setFields([
         {
@@ -16,7 +16,7 @@ const ForgotStep1 = ({ setStep, setIdentity }) => {
         },
       ]);
     },
-    [form]
+    [form],
   );
 
   const handleContinue = useCallback(
@@ -31,7 +31,7 @@ const ForgotStep1 = ({ setStep, setIdentity }) => {
       setIdentity(values?.identity);
       setStep((state) => state + 1);
     },
-    [setIdentity, setStep]
+    [setIdentity, setStep],
   );
 
   return (

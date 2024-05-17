@@ -1,6 +1,6 @@
-import axios, { AxiosResponse, AxiosInstance, AxiosError } from 'axios';
-import { ITokenParams, IAuthClient } from '../interfaces';
 import { APIResponse } from '@/interfaces';
+import axios, { AxiosResponse, AxiosInstance, AxiosError } from 'axios';
+import { IAuthClient, ITokenParams } from '../interfaces';
 import { AUTH_ROUTES } from './routes';
 
 const errorCallback = (status: number, error: string) => {
@@ -27,7 +27,7 @@ export const AuthClient = (issuer?: string) => {
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
 
     api.interceptors.response.use(
@@ -46,9 +46,9 @@ export const AuthClient = (issuer?: string) => {
 
         return errorCallback(
           resError?.status,
-          (resError && (dataError?.message || dataError?.error)) || 'Có lỗi trong quá trình thực thi'
+          (resError && (dataError?.message || dataError?.error)) || 'Có lỗi trong quá trình thực thi',
         );
-      }
+      },
     );
     return api;
   };

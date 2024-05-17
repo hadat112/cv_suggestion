@@ -1,9 +1,9 @@
+import DefaultLayout from '@/layouts/default';
+import { useAuthStore } from '@/stores/auth';
 import { Button, Result } from 'antd';
 import Link from 'next/link';
 import { ReactElement } from 'react';
 import { NextPageWithLayout } from '../_app';
-import { useAuthStore } from '@/stores/auth';
-import DefaultLayout from '@/layouts/default';
 
 const NotFound = () => {
   return (
@@ -13,7 +13,7 @@ const NotFound = () => {
         title="404"
         subTitle="Trang không tồn tại."
         extra={
-          <Link href="/" legacyBehavior>
+          <Link href="/" legacyBehavior={true}>
             <Button type="primary">Quay lại trang chủ</Button>
           </Link>
         }

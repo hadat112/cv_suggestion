@@ -21,7 +21,7 @@ export default function handleGetSession({ getClient, baseConfig }: DefaultHandl
     // if (!decoded || expTime < timenow) {
     //   return handleRefreshToken({ getClient, baseConfig })(req, res);
     // }
-
+    handleRefreshToken({ getClient, baseConfig })(req, res);
     res.status(200).json({
       data: {
         access_token: accessToken,

@@ -1,6 +1,6 @@
 import { messages } from 'mockup';
-import Message from './Message';
 import { memo } from 'react';
+import Message from './Message';
 
 const MessagesList = () => {
   const listMessages = messages.data;

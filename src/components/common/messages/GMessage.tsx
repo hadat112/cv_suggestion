@@ -1,5 +1,5 @@
-import { message } from 'antd';
 import { CloseIcon } from '@/components/icons';
+import { message } from 'antd';
 
 interface IProps {
   key?: string;

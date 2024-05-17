@@ -1,6 +1,6 @@
-import { useState, forwardRef, useEffect, MutableRefObject } from 'react';
-import cx from 'classnames';
 import { ArrowUpIcon } from '@/components/icons';
+import cx from 'classnames';
+import { MutableRefObject, forwardRef, useEffect, useState } from 'react';
 
 interface IProps {
   onGotoTop: () => void;

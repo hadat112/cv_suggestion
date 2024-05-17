@@ -1,5 +1,5 @@
-import cn from 'classnames';
 import { Avatar } from 'antd';
+import cn from 'classnames';
 import dayjs from 'dayjs';
 import React from 'react';
 import CvDownloadBtn from './CvDownloadBtn';
@@ -83,7 +83,7 @@ const Message = ({ message, nextMessage }) => {
                 {
                   'bg-th-primary text-white': isCurrentUser,
                   'bg-th-background-1': !isCurrentUser,
-                }
+                },
               )}
             >
               {message?.text}

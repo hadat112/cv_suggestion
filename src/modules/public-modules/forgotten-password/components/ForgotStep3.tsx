@@ -1,12 +1,12 @@
+import { useAuthStore } from '@/stores/auth';
 import { Form } from 'antd';
 import { useCallback, useState } from 'react';
-import { forgottenPasswordValidator } from '../../validation/login';
-import { useAuthStore } from '@/stores/auth';
-import { passwordRecommendMsg } from '../../constants';
-import LoginPasswordInput from '../../components/LoginPasswordInput';
 import LoginBtn from '../../components/LoginBtn';
+import LoginPasswordInput from '../../components/LoginPasswordInput';
+import { passwordRecommendMsg } from '../../constants';
+import { forgottenPasswordValidator } from '../../validation/login';
 
-const ForgotStep3 = ({ identity }) => {
+const ForgotStep3 = ({ _identity }) => {
   const [showExtra, setShowExtra] = useState({
     password: false,
   });
@@ -38,7 +38,7 @@ const ForgotStep3 = ({ identity }) => {
         rules={[forgottenPasswordValidator]}
       >
         <LoginPasswordInput
-          autoFocus
+          autoFocus={true}
           onFocus={() => handleExtra(true)}
           onBlur={() => handleExtra(false)}
           placeholder="Enter your password!"
