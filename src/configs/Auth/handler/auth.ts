@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { NextApiRequest, NextApiResponse } from 'next';
 
 type NextApiHandler<T = any> = (req: NextApiRequest, res: NextApiResponse<T>) => Promise<unknown>;

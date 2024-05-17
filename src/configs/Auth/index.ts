@@ -1,5 +1,4 @@
 import { getConfig } from './config';
-/* eslint-disable no-unused-vars */
 import {
   handleCallback,
   handleLogin,

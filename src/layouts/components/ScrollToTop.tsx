@@ -8,7 +8,6 @@ interface IProps {
 
 const DISTANCE_SHOW_SCROLL_TOP = 300;
 
-// eslint-disable-next-line react/display-name
 const ScrollTopButton = forwardRef(({ onGotoTop }: IProps, ref: MutableRefObject<HTMLDivElement>) => {
   const [showScrollUp, setShowScrollUp] = useState(false);
 

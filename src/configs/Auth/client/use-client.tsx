@@ -21,7 +21,6 @@ const UserProvider: React.FC<Props> = ({ children }) => {
       return;
     }
     if (!isAuthenticated) handleGetSession(pathname);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   if (PRIVATE_ROUTER.includes(pathname) && !isAuthenticated)

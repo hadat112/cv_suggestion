@@ -7,9 +7,7 @@ import ErrorBoundary from '@/components/common/ErrorBoundary';
 import { AppProvider } from '@/providers/AppProvider';
 import Head from 'next/head';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = any, IP = P> = NextPage<P, IP> & {
-  // eslint-disable-next-line no-unused-vars
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
