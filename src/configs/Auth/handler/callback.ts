@@ -24,7 +24,7 @@ export default function handleCallback(client: IAuthClient) {
 
     const params = {
       token: code as string,
-      tokenType: 'access_token' as const,
+      grant_type: 'access_token' as const,
     };
 
     const response = await client.getToken(params);
@@ -33,11 +33,12 @@ export default function handleCallback(client: IAuthClient) {
       const query = toQueryParams({ error: response.error });
       redirectUrl = `${appUrl}/callback${query}`;
     } else {
-      const { refresh_token, access_token } = response || {};
+      const { refresh_token, access_token, id_token } = response || {};
+      const itCookie = getCookie('it', cookieOptions, id_token);
       const rtCookie = getCookie('rt', cookieOptions, refresh_token);
       const atCookie = getCookie('at', cookieOptions, access_token);
 
-      res.setHeader('set-cookie', [rtCookie, atCookie]);
+      res.setHeader('set-cookie', [rtCookie, atCookie, itCookie]);
       redirectUrl = new URL(currentPath.current || '/', appUrl).toString();
     }
 

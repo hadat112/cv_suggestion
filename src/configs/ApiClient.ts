@@ -18,7 +18,7 @@ const processQueue = (error?: AxiosError) => {
 };
 
 const handlePushToLogin = async () => {
-  window.location.href = '/login';
+  window.location.href = '/api/auth/login';
 };
 
 const stopRequest = async (config: InternalAxiosRequestConfig<any>, api: AxiosInstance) =>
@@ -66,6 +66,8 @@ class ApiClient {
         return errorCallback(403, dataError);
 
       case 401:
+        window.prompt('helo1');
+
         if (isRefreshTokenErr) {
           handlePushToLogin();
           return errorCallback(401, dataError);
@@ -76,6 +78,8 @@ class ApiClient {
 
         const res: APIResponse = await this.api.get(REFRESH_URL);
         const access_token = res?.data?.access_token;
+
+        window.prompt('helo');
 
         if (!access_token) {
           processQueue(new AxiosError('Token hết hạn!'));

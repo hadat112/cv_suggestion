@@ -1,8 +1,11 @@
-import { PRIVATE_ROUTER, PUBLIC_ROUTER } from '@/constants/common';
+import { APIResponse } from '@/interfaces';
+import { getUserInfo } from '@/services';
 import { useAuthStore } from '@/stores/auth';
+import { useQuery } from '@tanstack/react-query';
 import { Spin } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import { IUserInfo } from '../interfaces';
 import { ErrorFallback } from './components/ErrorFallback';
 
 interface Props {
@@ -11,19 +14,24 @@ interface Props {
 
 const UserProvider: React.FC<Props> = ({ children }) => {
   const router = useRouter();
-  const { isAuthenticated, handleGetSession } = useAuthStore();
+  const { isAuthenticated, handleGetSession, setUserInfo } = useAuthStore();
   const { error, error_description } = router.query;
   const pathname = router.pathname;
 
+  const { data: userInfo } = useQuery({
+    queryKey: ['user-info'],
+    queryFn: getUserInfo,
+  });
+
   useEffect(() => {
-    if (PUBLIC_ROUTER.includes(pathname) && isAuthenticated) {
-      router.push('/');
-      return;
-    }
-    if (!isAuthenticated) handleGetSession(pathname);
+    if (!isAuthenticated && pathname !== '/callback') handleGetSession(pathname);
   }, [pathname]);
 
-  if (PRIVATE_ROUTER.includes(pathname) && !isAuthenticated)
+  useEffect(() => {
+    if (isAuthenticated) setUserInfo(userInfo);
+  }, [isAuthenticated, userInfo]);
+
+  if (!isAuthenticated && pathname !== '/callback')
     return (
       <div className="flex h-screen items-center justify-center">
         <Spin />

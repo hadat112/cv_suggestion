@@ -6,11 +6,11 @@ export const ErrorFallback = ({ error, error_description }) => {
   const router = useRouter();
 
   const handleBackHome = () => {
-    router.push('/login');
+    router.push('/');
   };
 
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-screen flex items-center justify-center bg-th-background">
       <Result
         status="500"
         title="Có lỗi trong quá trình thực thi."
@@ -21,9 +21,9 @@ báo cáo lỗi với các chi tiết bên dưới và các bước để tái t
             Back Home
           </Button>
         }
-        className="w-1/2 mx-auto"
+        className="w-1/2 mx-auto bg-th-background"
       >
-        <div className="text-lg">
+        <div className="text-lg text-th-text-primary">
           <div>
             <span className="font-bold">Error: </span> {error}
           </div>

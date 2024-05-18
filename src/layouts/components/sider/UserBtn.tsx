@@ -4,8 +4,7 @@ import { Avatar, Dropdown, MenuProps } from 'antd';
 import cn from 'classnames';
 
 export default function UserBtn({ collapsed }) {
-  const { handleLogout } = useAuthStore();
-
+  const { handleLogout, userInfo } = useAuthStore();
   const items: MenuProps['items'] = [
     {
       key: 'logout',
@@ -45,8 +44,8 @@ export default function UserBtn({ collapsed }) {
           />
           {!collapsed && (
             <div className="flex flex-col justify-center">
-              <p className="text-base font-semibold mb-0 whitespace-nowrap">Ha Van Dat</p>
-              <p className="text-md mb-0 text-th-text-hint">datha</p>
+              <p className="text-base font-semibold mb-0 whitespace-nowrap">{userInfo?.name}</p>
+              <p className="text-md mb-0 text-th-text-hint">{userInfo?.preferred_username}</p>
             </div>
           )}
         </div>

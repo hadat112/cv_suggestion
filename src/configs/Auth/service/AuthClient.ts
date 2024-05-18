@@ -15,8 +15,8 @@ const headers = {
 
 const { client_id, redirect_uri, authorizationParams, client_secret } = BASE_CONFIGS;
 
-const buildTokenParams = ({ token, tokenType }: ITokenParams) => {
-  if (tokenType === 'access_token')
+const buildTokenParams = ({ token, grant_type }: ITokenParams) => {
+  if (grant_type === 'access_token')
     return {
       client_id,
       redirect_uri,
@@ -60,8 +60,8 @@ const getAuthClient: (issuer: string) => IAuthClient = (issuer = '') => {
   );
 
   return {
-    getToken: ({ token, tokenType }: ITokenParams) => {
-      const params = buildTokenParams({ tokenType, token });
+    getToken: ({ token, grant_type }: ITokenParams) => {
+      const params = buildTokenParams({ grant_type, token });
       const headers = buildHeaders();
 
       return api.post(`${AUTH_ROUTES.TOKEN}`, params, {
