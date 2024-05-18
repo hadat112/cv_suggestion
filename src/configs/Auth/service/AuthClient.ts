@@ -68,6 +68,8 @@ const getAuthClient: (issuer: string) => IAuthClient = (issuer = '') => {
         headers,
       });
     },
+
+    refreshToken: (params: ITokenParams) => api.post(`${AUTH_ROUTES.TOKEN}`, params),
     logout: () => api.get(AUTH_ROUTES.LOGOUT),
     introspectToken: (params: ITokenParams) => api.post(`${AUTH_ROUTES.INTROSPECT_TOKEN}`, params),
   };
