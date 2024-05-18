@@ -40,9 +40,7 @@
     "ts-node": "^10.9.2"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,scss}": [
-      "biome check --staged --apply ./src"
-    ]
+    "*.{js,jsx,ts,tsx,css,scss}": ["biome check --staged --apply ./src"]
   },
   "engines": {
     "node": ">=18.17.1"

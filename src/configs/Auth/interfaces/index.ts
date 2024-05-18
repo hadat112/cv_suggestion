@@ -26,14 +26,13 @@ export interface IToken {
 
 export interface ITokenParams {
   token?: string;
-  tokenType: string;
+  grant_type: string;
 }
 
 export interface IAuthClient {
-  getToken(params: ITokenParams);
-  refreshToken(params: ITokenParams);
-  logout();
-  introspectToken(params: ITokenParams);
+  getToken(params: ITokenParams): any;
+  logout(): any;
+  introspectToken(params: ITokenParams): any;
 }
 
 export interface IUserInfo {

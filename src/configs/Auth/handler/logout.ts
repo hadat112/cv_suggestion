@@ -5,15 +5,17 @@ import { AUTH_ROUTES } from '../service/routes';
 import { getCookie, toQueryParams } from '../utils/functions';
 
 export default function handleLogout() {
-  const { cookieOptions, issuer } = BASE_CONFIGS;
+  const { cookieOptions, issuer, appUrl } = BASE_CONFIGS;
 
-  return async (_req: NextApiRequest, res: NextApiResponse) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
     const authorizeUrl = AUTH_ROUTES.LOGOUT;
-
+    const { it } = req.cookies;
+    const params = { post_logout_redirect_uri: appUrl, id_token_hint: it };
     const rtCookie = getCookie('rt', cookieOptions);
     const atCookie = getCookie('at', cookieOptions);
-    res.setHeader('set-cookie', [rtCookie, atCookie]);
+    const itCookie = getCookie('it', cookieOptions);
+    res.setHeader('set-cookie', [rtCookie, atCookie, itCookie]);
 
-    res.redirect(issuer + authorizeUrl);
+    res.redirect(issuer + authorizeUrl + (toQueryParams(params) || ''));
   };
 }

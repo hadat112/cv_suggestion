@@ -14,29 +14,28 @@ export default function handleRefreshToken(client: IAuthClient) {
 
     const params = {
       token: refreshToken,
-      tokenType: 'refresh_token' as const,
+      grant_type: 'refresh_token' as const,
     };
 
     const response = await client.getToken(params);
+    const { refresh_token, access_token } = response?.data || {};
 
-    if (response?.error) {
+    if (!access_token) {
       const rtCookie = getCookie('rt', cookieOptions);
       const atCookie = getCookie('at', cookieOptions);
       res.setHeader('set-cookie', [rtCookie, atCookie]);
       res.status(response.status).json(response);
     }
-    if (response?.data) {
-      const { refresh_token, access_token } = response.data;
-      const rtCookie = getCookie('rt', cookieOptions, refresh_token);
-      const atCookie = getCookie('at', cookieOptions, access_token);
 
-      res.setHeader('Set-Cookie', [rtCookie, atCookie]);
-      res.status(200).json({
-        data: {
-          access_token: response?.data?.access_token,
-        },
-        success: true,
-      });
-    }
+    const rtCookie = getCookie('rt', cookieOptions, refresh_token);
+    const atCookie = getCookie('at', cookieOptions, access_token);
+
+    res.setHeader('Set-Cookie', [rtCookie, atCookie]);
+    res.status(200).json({
+      data: {
+        access_token: response?.data?.access_token,
+      },
+      success: true,
+    });
   };
 }

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { create } from 'zustand';
 
 interface IAuth {
+  userInfo: any;
+  setUserInfo: any;
   isAuthenticated: boolean;
   authenticate: (isAuthenticated) => void;
   handleLogout: () => void;
@@ -11,8 +13,10 @@ interface IAuth {
 }
 
 export const useAuthStore = create<IAuth>((set) => ({
+  userInfo: {},
+  setUserInfo: (userInfo) => set({ userInfo }),
   isAuthenticated: false,
-  authenticate: (isAuthenticated) => set((state) => ({ ...state, isAuthenticated })),
+  authenticate: (isAuthenticated) => set({ isAuthenticated }),
   handleGetSession: async (pathname) => {
     try {
       const res = await axios(`${process.env.NEXT_PUBLIC_APP_URL}/api/auth/session`);

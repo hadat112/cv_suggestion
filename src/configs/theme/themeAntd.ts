@@ -14,7 +14,7 @@ export const antdDefaultTheme: antdTheme = (COLORS) => ({
     colorTextPlaceholder: COLORS['text-hint'],
     controlHeight: 36,
     controlHeightLG: 40,
-    controlHeightSM: 32,
+    controlHeightSM: 28,
     controlHeightXS: 28,
   },
   components: {
