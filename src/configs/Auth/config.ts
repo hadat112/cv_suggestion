@@ -1,6 +1,6 @@
 export const BASE_CONFIGS = {
   appUrl: process.env.NEXT_PUBLIC_APP_URL || '',
-  issuer: `${process.env.NEXT_PUBLIC_OIDC_ISSUER}/realms/HD/protocol/openid-connect`,
+  issuer: process.env.NEXT_PUBLIC_OIDC_ISSUER,
   redirect_uri: process.env.OIDC_REDIRECT_URI,
   client_id: process.env.OIDC_CLIENT_ID,
   client_secret: process.env.OIDC_CLIENT_SECRET,
