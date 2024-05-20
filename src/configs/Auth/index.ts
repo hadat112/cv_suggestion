@@ -17,10 +17,10 @@ function _initAuth() {
 
   return handlerBuilder({
     handleLogin: handleLogin(),
-    handleCallback: handleCallback(client),
     handleLogout: handleLogout(),
-    handleRefreshToken: handleRefreshToken(client),
+    handleCallback: handleCallback(client),
     handleGetSession: handleGetSession(client),
+    handleRefreshToken: handleRefreshToken(client),
   });
 }
 
