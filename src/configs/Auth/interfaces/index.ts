@@ -26,7 +26,7 @@ export interface IToken {
 
 export interface ITokenParams {
   token?: string;
-  grant_type: string;
+  grant_type?: string;
 }
 
 export interface IAuthClient {
