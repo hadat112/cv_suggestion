@@ -34,7 +34,11 @@ export default function DefaultLayout({ content }: IProps) {
   const isMobile = deviceType === 'mobile';
   const scrollContainer = useRef<HTMLDivElement | null>(null);
 
-  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [collapsed, setCollapsed] = useState<boolean>(() => {
+    if (isMobile) return true;
+    const savedCollapsed = JSON.parse(localStorage.getItem('sider-collapsed'));
+    return savedCollapsed ?? false;
+  });
 
   const handleGotoTop = () => {
     scrollContainer.current?.scrollTo({
@@ -47,12 +51,6 @@ export default function DefaultLayout({ content }: IProps) {
   const handleCollapsed = () => {
     if (!collapsed) setCollapsed(true);
   };
-
-  useEffect(() => {
-    if (isMobile) return;
-    const savedCollapsed = JSON.parse(localStorage.getItem('sider-collapsed'));
-    setCollapsed(savedCollapsed);
-  }, [isMobile]);
 
   return (
     <Layout className="flex flex-row h-screen overflow-hidden relative">
