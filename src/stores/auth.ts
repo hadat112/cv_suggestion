@@ -1,5 +1,4 @@
-import { PUBLIC_ROUTER } from '@/constants/common';
-import { APIResponse } from '@/interfaces';
+import { toQueryParams } from '@/configs/Auth/utils/functions';
 import axios from 'axios';
 import { create } from 'zustand';
 
@@ -27,7 +26,8 @@ export const useAuthStore = create<IAuth>((set) => ({
       set((state) => ({ ...state, isAuthenticated: true }));
     } catch (_error) {
       localStorage.removeItem('access_token');
-      window.location.href = '/api/auth/login';
+      const params = toQueryParams({ current: pathname });
+      window.location.href = `/api/auth/login${params}`;
     }
   },
   handleLogout: () => {
@@ -35,7 +35,5 @@ export const useAuthStore = create<IAuth>((set) => ({
     set((state) => ({ ...state, isAuthenticated: false }));
     window.location.href = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/logout`;
     localStorage.removeItem('access_token');
-    localStorage.removeItem('identity');
-    localStorage.removeItem('remember');
   },
 }));

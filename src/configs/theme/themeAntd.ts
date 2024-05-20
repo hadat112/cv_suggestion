@@ -18,15 +18,6 @@ export const antdDefaultTheme: antdTheme = (COLORS) => ({
     controlHeightXS: 28,
   },
   components: {
-    Button: {
-      colorText: COLORS.primary,
-      colorBorder: COLORS.primary,
-    },
-    Modal: {
-      paddingContentHorizontalLG: 0,
-      paddingMD: 0,
-      colorTextHeading: '#fff',
-    },
     Select: {
       colorBgBase: COLORS['white'],
       algorithm: true,
