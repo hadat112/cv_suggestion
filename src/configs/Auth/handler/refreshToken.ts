@@ -18,7 +18,7 @@ export default function handleRefreshToken(client: IAuthClient) {
     };
 
     const response = await client.getToken(params);
-    const { refresh_token, access_token } = response?.data || {};
+    const { refresh_token, access_token } = response || {};
 
     if (!access_token) {
       const rtCookie = getCookie('rt', cookieOptions);
@@ -31,9 +31,10 @@ export default function handleRefreshToken(client: IAuthClient) {
     const atCookie = getCookie('at', cookieOptions, access_token);
 
     res.setHeader('Set-Cookie', [rtCookie, atCookie]);
+
     res.status(200).json({
       data: {
-        access_token: response?.data?.access_token,
+        access_token: access_token,
       },
       success: true,
     });
